@@ -1,0 +1,12 @@
+<div
+  id="placesContainer"
+  class="mb-4 mt-4 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"
+
+>
+  <rm-moto-card
+    class="col"
+    *ngFor="let moto of motos "
+    [moto]="moto"
+    (deleted)="deleteMoto(moto)"
+  ></rm-moto-card>
+</div>

@@ -1,0 +1,21 @@
+
+
+    <div class="col-md-4 mb-4">
+      <div class="card mb-4">
+        <a [routerLink]="['/motos', moto.id]" >
+          <img class="card-img-top" src="" />
+        </a>
+        <div class="card-body">
+          <h4 class="card-title"><a [routerLink]="['/motos', moto.id]" class="text-decoration-none">{{ moto.model }}</a></h4>
+          <p class="card-text">{{ moto.description }}</p>
+
+          <div class="card-text">
+            <small class="text-muted">
+              <strong>Phone: </strong>{{ moto.color }}
+            </small>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{ moto.price}}</small>
+        </div>
+      </div>

@@ -1,0 +1,93 @@
+<!-- Credit card form -->
+<section>
+  <div class="row">
+    <div class="col-md-8 mb-4">
+      <div class="card mb-4">
+        <div class="card-header py-3">
+          <h5 class="mb-0">Detalles de la reserva</h5>
+        </div>
+        <div class="card-body">
+          <form
+          (ngSubmit)="addReservation()"
+          [formGroup]="reservationForm">
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <label for="name">Name:</label>
+                  <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  formControlName="nameForm"
+                  [ngClass]="validClasses(nameControl, 'is-valid', 'is-invalid')"
+                />
+                <div class="invalid-feedback" *ngIf="nameControl.errors?.['required']">
+                  El nombre no puede quedar vacío
+                </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Text input -->
+            <div class="form-outline mb-4">
+              <label for="correo">Email:</label>
+              <input
+              type="text"
+              class="form-control"
+              name="email"
+              formControlName="emailForm"
+              [ngClass]="validClasses(emailControl, 'is-valid', 'is-invalid')"
+            />
+            <div class="invalid-feedback" *ngIf="emailControl.errors?.['required']">
+              El email no puede quedar vació
+            </div>
+            </div>
+
+            <!-- Text input -->
+            <div class="form-outline mb-4">
+              <label for="correo">Fecha Recogida:</label>
+              <input
+              type="text"
+              class="form-control"
+              name="start"
+              formControlName="startForm"
+              [ngClass]="validClasses(startControl, 'is-valid', 'is-invalid')"
+            />
+            <div class="invalid-feedback" *ngIf="startControl.errors?.['required']">
+              La fecha no puede quedar vacia
+            </div>
+            </div>
+
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <label for="correo">Fecha Devolución:</label>
+              <input
+              type="text"
+              class="form-control"
+              name="end"
+              formControlName="endForm"
+              [ngClass]="validClasses(endControl, 'is-valid', 'is-invalid')"
+            />
+            <div class="invalid-feedback" *ngIf="endControl.errors?.['required']">
+              La fecha no puede quedar vacia
+            </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="reservationForm.invalid">Reservar</button>
+            <button class="btn btn-success" (click)="goBack()">Go back</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <rm-moto-card
+      [moto]="moto"
+  ></rm-moto-card>
+    </div>
+  </div>
+</section>
+
+
