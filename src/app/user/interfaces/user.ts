@@ -1,15 +1,14 @@
 export interface User {
   id?: number;
-  name: string;
   email: string;
-  password?: string;
+  roles?: [];
+  password: string;
+  name: string;
   phone: number;
   license: string;
-  role: string;
-  me?: boolean;
 }
 
 export interface UserLogin {
-  email: string;
+  username: string;
   password: string;
 }

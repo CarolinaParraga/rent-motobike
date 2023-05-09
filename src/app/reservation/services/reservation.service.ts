@@ -18,12 +18,28 @@ export class ReservationService {
     (this.reservationURL)
     .pipe(
         retry(3),
-        map(response => response.reservations),
+        map(response => response.data),
         catchError((resp: HttpErrorResponse) =>
           throwError(() =>
             `Error getting restaurants. Status: ${resp.status}. Message: ${resp.message}`
           )
         )
+    );
+  }
+
+  addReservation(reservation: Reservation): Observable<Reservation> {
+    return this.http.post<ResponseReservation>
+    (this.reservationURL,
+      reservation
+    )
+    .pipe(
+      retry(3),
+      map((response) => response.data),
+      catchError((resp: HttpErrorResponse) =>
+        throwError(() =>
+          `Error adding product. Status: ${resp.status}. Message: ${resp.message}`
+        )
+      )
     );
   }
 
@@ -33,7 +49,7 @@ export class ReservationService {
     return this.http.get<ResponseReservation>(`${this.reservationURL}/${id}`)
     .pipe(
       retry(3),
-      map((response) => response.reservation),
+      map((response) => response.data),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
           `Error getting product ${id}. Status: ${resp.status}. Message: ${resp.message}`

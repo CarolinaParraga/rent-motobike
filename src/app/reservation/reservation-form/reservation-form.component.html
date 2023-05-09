@@ -1,0 +1,149 @@
+<!-- Section: Design Block -->
+<section class="">
+  <!-- Jumbotron -->
+  <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container">
+      <div class="row gx-lg-5 align-items-center">
+
+        <div class="col-lg-12 mb-5 mb-lg-0">
+          <div class="card">
+            <div class="card-body py-5 px-md-5">
+              <div class="text-center mb-4">
+                <img src="../../../assets/imgs/logo.png"
+                  style="width: 185px;" alt="logo">
+
+              </div>
+              <form (ngSubmit)="editReservation()"
+              #reservationForm="ngForm">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label for="correo">Fecha recogida:</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        name="startdate"
+                        [(ngModel)]="newReservation.startdate"
+                        #startdateModel="ngModel"
+                        [ngClass]="validClasses(startdateModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="startdateModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline mb-4">
+                      <label for="correo">Fecha devolución:</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        name="enddate"
+                        [(ngModel)]="newReservation.enddate"
+                        #enddateModel="ngModel"
+                        [ngClass]="validClasses(enddateModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="enddateModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label for="nombre">Hora recogida: </label>
+                      <input
+                        type="time"
+                        class="form-control"
+                        name="starthour"
+                        [(ngModel)]="newReservation.starthour"
+                        #starthourModel="ngModel"
+                        [ngClass]="validClasses(starthourModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="starthourModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label for="nombre">Hora devolución:</label>
+                      <input
+                        type="time"
+                        class="form-control"
+                        name="endhour"
+                        [(ngModel)]="newReservation.endhour"
+                        #endhourModel="ngModel"
+                        [ngClass]="validClasses(endhourModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="endhourModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label for="nombre">Lugar de recogida:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="pickuplocation"
+                        [(ngModel)]="newReservation.pickuplocation"
+                        #pickuplocationModel="ngModel"
+                        [ngClass]="validClasses(pickuplocationModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="pickuplocationModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline mb-4">
+                      <label for="password">Password:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="retunlocation"
+                        [(ngModel)]="newReservation.returnlocation"
+                        #returnlocationModel="ngModel"
+                        [ngClass]="validClasses(returnlocationModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="returnlocationModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- Submit button -->
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="reservationForm.invalid"
+                >
+                <!-- WE ARE CHANGING THE NAME TO THE BUTTON IT CAN ADD OR EDIT -->
+                  Editar reserva
+                </button>
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->

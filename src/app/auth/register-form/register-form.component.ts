@@ -28,7 +28,8 @@ registerForm!: FormGroup;
   emailControl!: FormControl<string>;
   email2Control!: FormControl<string>;
   passwordControl!: FormControl<string>;
-  imageControl!: FormControl<string>;
+  licenseControl!: FormControl<string>;
+  phoneControl!: FormControl<number>;
 
 
 constructor(
@@ -57,8 +58,12 @@ ngOnInit(): void {
         Validators.required,
         Validators.minLength(6),
       ]);
-      this.imageControl = this.fb.control('', [
+      this.licenseControl = this.fb.control('', [
         Validators.required
+      ]);
+      this.phoneControl = this.fb.control(0, [
+        Validators.required,
+        Validators.minLength(9),
       ]);
 
       this.registerForm = this.fb.group({
@@ -66,7 +71,8 @@ ngOnInit(): void {
         emailForm: this.emailControl,
         email2Form: this.email2Control,
         passwordForm: this.passwordControl,
-        imageForm: this.imageControl,
+        licenseForm: this.licenseControl,
+        phoneForm: this.phoneControl,
       });
 
       this.resetUser();
@@ -80,8 +86,7 @@ resetUser() {
   email: '',
   password: '',
   phone:0,
-  license:'',
-  role:''
+  license:''
   };
   this.saved = false;
 }
@@ -97,10 +102,12 @@ canDeactivate() {
   onRegister() {
     if(this.email2Control.value === this.emailControl.value){
       this.newUser.name = this.nameControl.value;
-    this.newUser.email = this.emailControl.value;
-    this.newUser.password = this.passwordControl.value;
+      this.newUser.email = this.emailControl.value;
+      this.newUser.password = this.passwordControl.value;
+      this.newUser.license = this.licenseControl.value;
+      this.newUser.phone = this.phoneControl.value;
 
-    this.newUser.role = '';
+
 
     this.authService.register(this.newUser)
     .subscribe({
@@ -122,7 +129,7 @@ canDeactivate() {
     });
     }
     else{
-      this.snackBar.open('Error. Emails do not match', undefined, {
+      this.snackBar.open('Error. Los emails no son iguales', undefined, {
         duration: 1500,
       });
     }

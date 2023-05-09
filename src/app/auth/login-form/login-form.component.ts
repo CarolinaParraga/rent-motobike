@@ -36,7 +36,7 @@ export class LoginFormComponent implements OnInit  {
 
   resetLogin() {
     this.userLogin =  {
-      email: '',
+      username: '',
       password: '',
     };
     this.saved = false;
@@ -55,7 +55,7 @@ export class LoginFormComponent implements OnInit  {
       .subscribe({
         next: (res) => {
           console.log(res);
-          localStorage.setItem("token", res.accessToken );
+          localStorage.setItem("token", res.token );
 
             this.router.navigate(['/restaurants']);
         },

@@ -7,10 +7,10 @@
           <h5 class="mb-0">Detalles de la reserva</h5>
         </div>
         <div class="card-body">
-          <form
+          <!-- <form
           (ngSubmit)="addReservation()"
           [formGroup]="reservationForm">
-            <!-- 2 column grid layout with text inputs for the first and last names -->
+
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
@@ -30,7 +30,6 @@
 
             </div>
 
-            <!-- Text input -->
             <div class="form-outline mb-4">
               <label for="correo">Email:</label>
               <input
@@ -45,7 +44,6 @@
             </div>
             </div>
 
-            <!-- Text input -->
             <div class="form-outline mb-4">
               <label for="correo">Fecha Recogida:</label>
               <input
@@ -60,7 +58,6 @@
             </div>
             </div>
 
-            <!-- Email input -->
             <div class="form-outline mb-4">
               <label for="correo">Fecha Devolución:</label>
               <input
@@ -77,16 +74,29 @@
 
             <button type="submit" class="btn btn-primary" [disabled]="reservationForm.invalid">Reservar</button>
             <button class="btn btn-success" (click)="goBack()">Go back</button>
-          </form>
+          </form> -->
+
         </div>
       </div>
     </div>
 
     <div class="col-md-4 mb-4">
-      <rm-moto-card
-      [moto]="moto"
-  ></rm-moto-card>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h4 class="card-title"><a [routerLink]="" class="text-decoration-none">Modelo:{{ moto.model }}</a></h4>
+          <p class="card-text">Descripción: {{ moto.description }}</p>
+          <p class="card-text">Marca: {{ moto.brand }}</p>
+          <div class="card-text">
+            <small class="text-muted">
+              <strong>Color: </strong>{{ moto.color }}
+            </small>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Precio: {{ moto.price}}€</small>
+        </div>
     </div>
+  </div>
   </div>
 </section>
 

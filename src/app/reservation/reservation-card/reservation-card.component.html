@@ -1,0 +1,24 @@
+
+<tbody>
+  <tr>
+    <td>{{reservation.id}}</td>
+    <td>{{reservation.startdate}}</td>
+    <td>{{reservation.enddate}}</td>
+    <td>{{reservation.starthour}}</td>
+    <td>{{reservation.endhour}}</td>
+    <td>{{reservation.moto}}</td>
+    <td>{{reservation.pickuplocation}}</td>
+    <td>{{reservation.returnlocation}}</td>
+    <td>
+      <button type="button" class="btn btn-danger btn-sm px-3" (click)="delete()">
+        <i class="fas fa-times"></i>
+      </button>
+    </td>
+    <td>
+      <button type="button" class="btn btn-danger btn-sm px-3" (click)="edit()">
+        <i class="fas fa-times"></i>
+      </button>
+    </td>
+  </tr>
+</tbody>
+

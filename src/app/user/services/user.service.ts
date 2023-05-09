@@ -14,25 +14,33 @@ export class UserService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getMe(): Observable<User> {
-    return this.http.get<UserResponse>(`${this.userURL}/me`)
+  getProfile(): Observable<User> {
+    return this.http.get<UserResponse>(`${this.userURL}/profile`)
     .pipe(
-      map((response) => response.user)
+      map((response) => response.data)
     );
   }
 
   getOneUser(id: number):Observable<User> {
     return this.http.get<UserResponse>(`${this.userURL}/${id}`)
     .pipe(
-      map((response) => response.user)
+      map((response) => response.data)
     );
 }
 
 
-  editRestaurant(user: User): Observable<void> {
+  editUser(user: User): Observable<void> {
     return this.http.put<void>
     (`${this.userURL}/${user.id}`,
     user
+    )
+    .pipe(
+      retry(3),
+      catchError((resp: HttpErrorResponse) =>
+        throwError(() =>
+          `Error editing user ${user.id}. Status: ${resp.status}. Message: ${resp.message}`
+        )
+      )
     );
   }
 

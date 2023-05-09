@@ -9,7 +9,7 @@
               <h2 class="text-uppercase text-center mb-5">{{ editing ? "Editar" : "Añadir" }} vehículo</h2>
 
               <form (ngSubmit)="addEditMoto()"
-              #restaurantForm="ngForm">
+              #motoForm="ngForm">
 
                 <div class="form-outline mb-4">
                   <label for="registration">Matrícula</label>
@@ -18,11 +18,11 @@
                     class="form-control"
                     name="registration"
                     [(ngModel)]="newMoto.carregistration"
-                    #nameModel="ngModel"
-                    [ngClass]="validClasses(nameModel, 'is-valid', 'is-invalid')"
+                    #registrationModel="ngModel"
+                    [ngClass]="validClasses(registrationModel, 'is-valid', 'is-invalid')"
                     required
                     />
-                    <div class="invalid-feedback" *ngIf="nameModel.errors?.['required']">
+                    <div class="invalid-feedback" *ngIf="registrationModel.errors?.['required']">
                       La matrícula no puede quedar vacía
                     </div>
                 </div>
@@ -34,11 +34,11 @@
                     class="form-control"
                     name="color"
                     [(ngModel)]="newMoto.color"
-                    #nameModel="ngModel"
-                    [ngClass]="validClasses(nameModel, 'is-valid', 'is-invalid')"
+                    #colorModel="ngModel"
+                    [ngClass]="validClasses(colorModel, 'is-valid', 'is-invalid')"
                     required
                     />
-                    <div class="invalid-feedback" *ngIf="nameModel.errors?.['required']">
+                    <div class="invalid-feedback" *ngIf="colorModel.errors?.['required']">
                       El color no puede quedar vacío
                     </div>
                 </div>
@@ -50,11 +50,11 @@
                     class="form-control"
                     name="model"
                     [(ngModel)]="newMoto.model"
-                    #nameModel="ngModel"
-                    [ngClass]="validClasses(nameModel, 'is-valid', 'is-invalid')"
+                    #modelModel="ngModel"
+                    [ngClass]="validClasses(modelModel, 'is-valid', 'is-invalid')"
                     required
                     />
-                    <div class="invalid-feedback" *ngIf="nameModel.errors?.['required']">
+                    <div class="invalid-feedback" *ngIf="modelModel.errors?.['required']">
                       El modelo no puede quedar vacío
                     </div>
                 </div>
@@ -66,11 +66,11 @@
                     class="form-control"
                     name="description"
                     [(ngModel)]="newMoto.description"
-                    #nameModel="ngModel"
-                    [ngClass]="validClasses(nameModel, 'is-valid', 'is-invalid')"
+                    #descriptionModel="ngModel"
+                    [ngClass]="validClasses(descriptionModel, 'is-valid', 'is-invalid')"
                     required
                     />
-                    <div class="invalid-feedback" *ngIf="nameModel.errors?.['required']">
+                    <div class="invalid-feedback" *ngIf="descriptionModel.errors?.['required']">
                       La descripción no puede quedar vacía
                     </div>
                 </div>
@@ -82,11 +82,11 @@
                     class="form-control"
                     name="price"
                     [(ngModel)]="newMoto.price"
-                    #nameModel="ngModel"
-                    [ngClass]="validClasses(nameModel, 'is-valid', 'is-invalid')"
+                    #priceModel="ngModel"
+                    [ngClass]="validClasses(priceModel, 'is-valid', 'is-invalid')"
                     required
                     />
-                    <div class="invalid-feedback" *ngIf="nameModel.errors?.['required']">
+                    <div class="invalid-feedback" *ngIf="priceModel.errors?.['required']">
                       El precio no puede quedar vacío
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                   <button
                     type="submit"
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                    [disabled]="restaurantForm.invalid"
+                    [disabled]="motoForm.invalid"
                   >
                   <!-- WE ARE CHANGING THE NAME TO THE BUTTON IT CAN ADD OR EDIT -->
                     {{ editing ? "Editar" : "Añadir" }} vehículo

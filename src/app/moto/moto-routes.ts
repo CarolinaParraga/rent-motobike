@@ -10,7 +10,7 @@ import { MotoDetailComponent } from './moto-detail/moto-detail.component';
 import { MotoFormComponent } from './moto-form/moto-form.component';
 //import { LoginActivateGuard } from '../shared/guards/login-activate.guard';
 
-export const RESTAURANT_ROUTES: Routes = [
+export const MOTO_ROUTES: Routes = [
   { path: '', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
   loadComponent: () =>
   import('./motos-page/motos-page.component').then(
@@ -36,7 +36,7 @@ export const RESTAURANT_ROUTES: Routes = [
     //canActivate: [motoIdGuard, LoginActivateGuard ],
 
     resolve: {
-      restaurant: motoResolver,
+      moto: motoResolver,
     },
 
   },
@@ -48,7 +48,7 @@ export const RESTAURANT_ROUTES: Routes = [
     //canActivate: [motoIdGuard, LoginActivateGuard ],
 
     resolve: {
-      restaurant: motoResolver,
+      moto: motoResolver,
     },
 
   },
@@ -60,7 +60,7 @@ export const RESTAURANT_ROUTES: Routes = [
     //canActivate: [motoIdGuard, LoginActivateGuard ],
     canDeactivate: [leavePageGuard],
     resolve: {
-      restaurant: motoResolver,
+      moto: motoResolver,
     },
   },
 ];

@@ -24,7 +24,7 @@ export class AuthService {
     return this.http.post<TokenResponse>(`${this.authURL}/login`, userLogin)
     .pipe(
       map((user: TokenResponse) => {
-        localStorage.setItem("token", user.accessToken );
+        localStorage.setItem("token", user.token );
         this.loginChange$.next(true);
         return user;
       }),

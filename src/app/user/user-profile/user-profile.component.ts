@@ -34,46 +34,33 @@ export class UserProfileComponent implements OnInit {
 
   resetUser() {
     this.user =  {
-      name: '',
       email: '',
+      roles: [],
+      password: '',
+      name:'',
       phone: 0,
-      license: '',
-      role: '',
-      me: false
+      license: ''
+    }
     };
 
-  }
 
   ngOnInit(): void {
 
-    let idUser = this.route.snapshot.paramMap.get("id");
-    const id = idUser ? +idUser : null;
-    console.log(id);
-    if(id == null){
-      this.userService.getMe()
-      .subscribe({
-        next: rta => this.user = rta,
-        error: error => console.error(error),
-        complete: () => console.log("User loaded")
-      });
-    }
-    else{
-      this.userService.getOneUser(id? id: 0)
-      .subscribe({
-        next: rta => this.user = rta,
-        error: error => console.error(error),
-        complete: () => console.log("User loaded")
-      });
-    }
+    this.userService.getProfile()
+    .subscribe({
+      next: rta => this.user = rta,
+      error: error => console.error(error),
+      complete: () => console.log("User loaded")
+    });
+
+
   }
   goBack() {
     this.router.navigate(['/motos']);
   }
 
   edit() {
-    let idUser = this.route.snapshot.paramMap.get("id");
-    const id = idUser ? +idUser : null;
-    this.router.navigate(['/users/edit']);
+    this.router.navigate(['/users', this.user.id, 'edit']);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MotoCardComponent } from '../moto-card/moto-card.component';
 import { Moto } from '../interfaces/moto';
 import { RouterLink } from '@angular/router';
@@ -34,6 +34,7 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
   newReservation!: Reservation;
   saved = false;
   rate = 0;
+  idMoto = '';
 
   reservationForm!: FormGroup;
   nameControl!: FormControl<string>;
@@ -54,13 +55,16 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
 
   resetReservation() {
     this.newReservation =  {
-      stardate: "",
+      startdate: "",
       enddate: "",
-      model: "",
-      customer: 0,
+      starthour:"",
+      endhour:"",
+      user: 0,
       moto: 0,
+      pickuplocation: "",
+      returnlocation: "",
       status: false,
-      reservationdate: ""
+
     };
     this.saved = false;
   }
@@ -71,23 +75,29 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
       Validators.required,
     ]);
 
+    /*this.idMoto = this.route.snapshot.params['id'];
+    console.log(this.idMoto);
+    const id = this.idMoto ? +this.idMoto : null;
+    console.log(id)*/
+
+    //this.resetReservation();
     this.moto = this.route.snapshot.data['moto'];
-    this.resetReservation();
     this.motoService.getMoto(this.moto.id!)
     .subscribe({
-      next: rta =>{ this.moto = rta,
-      console.log(this.moto)},
+      next: rta => {
+        console.log(rta)
+        this.moto = rta},
       error: error => console.error(error),
       complete: () => console.log("Moto loaded")
     });
-    this.userService.getMe()
+    /*this.userService.getProfile()
     .subscribe({
       next: (rta) => {
         this.userLoged = rta
       },
       error: error => console.error(error),
       complete: () => console.log("User loaded")
-    });
+    });*/
 
 
   }
@@ -97,11 +107,11 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
     confirm('Quiere abandonar la página?. Los cambios no se guardarán');
   }
 
-  addReservation(){
+  /*addReservation(){
 
     this.newReservation.reservationdate = new Date().toLocaleDateString();
-    this.newReservation.moto = this.moto.id!;
-    this.newReservation.customer = this.userLoged.id!;
+    this.newReservation.moto = this.moto!;
+    this.newReservation.user = this.userLoged!;
 
     this.motoService.addReservation(this.newReservation)
       .subscribe({
@@ -119,17 +129,17 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
             duration: 1500,
           });}
       });
-  }
+  }*/
 
   goBack() {
     this.router.navigate(['/motos']);
   }
 
-  validClasses(control: FormControl, validClass: string, errorClass: string) {
+  /*validClasses(control: FormControl, validClass: string, errorClass: string) {
     return {
       [validClass]: control.touched && control.valid,
       [errorClass]: control.touched && control.invalid
     };
-  }
+  }*/
 
 }

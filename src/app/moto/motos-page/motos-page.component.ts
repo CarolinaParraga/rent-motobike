@@ -6,6 +6,7 @@ import { MotoFormComponent } from '../moto-form/moto-form.component';
 import { MotoCardComponent } from '../moto-card/moto-card.component';
 import { MotoService } from '../services/moto.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MotoFilterPipe } from '../pipes/moto-filter.pipe';
 
 @Component({
   selector: 'rm-motos-page',
@@ -14,13 +15,15 @@ import { ActivatedRoute, Router } from '@angular/router';
     CommonModule,
     FormsModule,
     MotoFormComponent,
-    MotoCardComponent
+    MotoCardComponent,
+    MotoFilterPipe
   ],
   templateUrl: './motos-page.component.html',
   styleUrls: ['./motos-page.component.css']
 })
 export class MotosPageComponent implements OnInit {
   motos: Moto[] = [];
+  search = '';
 
   constructor(private readonly motoService: MotoService, private route: ActivatedRoute) {
 
@@ -30,7 +33,9 @@ export class MotosPageComponent implements OnInit {
 
     this.motoService.getMotos()
     .subscribe({
-      next: rta => this.motos = rta,
+      next: rta => {
+        console.log(rta)
+        this.motos = rta},
       error: error =>{
         console.error(error)},
       complete: () => console.log("Motos loaded")

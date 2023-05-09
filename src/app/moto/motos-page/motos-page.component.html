@@ -1,11 +1,45 @@
+
+<!-- about us -->
+<section id = "about" class = "py-5">
+  <div class = "container">
+      <div class = "row gy-lg-5 align-items-center">
+          <div class = "col-lg-6 order-lg-1 text-center text-lg-start">
+              <div class = "title pt-3 pb-5">
+                  <h2 class = "position-relative d-inline-block ms-4">About Us</h2>
+              </div>
+              <p class = "lead text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, ipsam.</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem fuga blanditiis, modi exercitationem quae quam eveniet! Minus labore voluptatibus corporis recusandae accusantium velit, nemo, nobis, nulla ullam pariatur totam quos.</p>
+          </div>
+          <div class = "col-lg-6 order-lg-0">
+              <img src = "../../../assets/imgs/about.png" alt = "" class = "img-fluid">
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end of about us -->
+
+<nav class="navbar navbar-light bg-light justify-content-between mt-3 row">
+
+  <form class="container-fluid col">
+    <input
+      class="form-control"
+      type="text"
+      name="search"
+      placeholder="Search"
+      aria-label="Search"
+      [(ngModel)]="search"
+    />
+  </form>
+</nav>
+
 <div
   id="placesContainer"
-  class="mb-4 mt-4 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"
+  class="mb-4 mt-4 row row-cols-1 row-cols-md-3 row-cols-xl-3 g-4"
 
 >
   <rm-moto-card
     class="col"
-    *ngFor="let moto of motos "
+    *ngFor="let moto of motos | motoFilter: search "
     [moto]="moto"
     (deleted)="deleteMoto(moto)"
   ></rm-moto-card>

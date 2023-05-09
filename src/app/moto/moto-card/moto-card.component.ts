@@ -22,7 +22,38 @@ export class MotoCardComponent {
   @Output() deleted = new EventEmitter<void>();
   @Input() moto!: Moto;
 
+  fotos: string[] = ['moto1', 'moto2', 'moto3', 'moto4']
+
   constructor(private readonly motoService: MotoService, private dialogo: MatDialog, private snackBar: MatSnackBar) {
+
+  }
+
+  delete() {
+
+    this.dialogo
+      .open(DialogConfirmationComponent, {
+        data: `¿Quiere eliminar este modelo de moto ${this.moto.model}?`
+      })
+      .afterClosed()
+      .subscribe((conf: Boolean) => {
+        if (!conf) return;
+        this.motoService
+          .deleteMoto(this.moto.id!)
+          .subscribe({
+            next: () => {
+              console.log('deleting moto');
+              this.deleted.emit();
+              this.snackBar.open('Moto eliminada', undefined, {
+                duration: 1500,
+              });
+            },
+            error: (error) =>{
+              console.error(error);
+              this.snackBar.open('Error', undefined, {
+                duration: 1500,
+              });}
+          });
+      })
 
   }
 

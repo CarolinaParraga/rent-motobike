@@ -35,12 +35,16 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
   }
 
   resetMoto() {
+
     this.newMoto =  {
+      brand:'',
       carregistration: '',
       color: '',
       model: '',
+      price: 0,
+      photo:'',
       description:'',
-      price: 0
+
     };
     this.saved = false;
   }

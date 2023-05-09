@@ -1,0 +1,55 @@
+<nav class="navbar navbar-light bg-light justify-content-between mt-3 row">
+  <form class="container-fluid col">
+    <input
+      class="form-control"
+      type="text"
+      name="search"
+      placeholder="Search"
+      aria-label="Search"
+      [(ngModel)]="search"
+    />
+  </form>
+</nav>
+
+<section class="intro">
+  <div class="bg-image h-100" style="background-color: #60e9f0;">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-borderless mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">{{ headers.id }}</th>
+                        <th scope="col">{{ headers.startdate }}</th>
+                        <th scope="col">{{ headers.enddate }}</th>
+                        <th scope="col">{{ headers.starthour }}</th>
+                        <th scope="col">{{ headers.endhour }}</th>
+                        <th scope="col">{{ headers.moto }}</th>
+                        <th scope="col">{{ headers.pickuplocation }}</th>
+                        <th scope="col">{{ headers.returnlocation }}</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+
+>
+  <rm-reservation-card
+    class="col"
+    *ngFor="let reservation of reservations | reservationPipe: search"
+    [reservation]="reservation"
+    (deleted)="deleteRestaurant(reservation)"
+  ></rm-reservation-card>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

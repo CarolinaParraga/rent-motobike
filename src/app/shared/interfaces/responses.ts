@@ -6,23 +6,23 @@ import { UserLogin } from "../../user/interfaces/user";
 
 
 export interface ResponseMotos {
-  motos: Moto[];
+  data: Moto[];
 }
 
 export interface ResponseMoto {
-  moto: Moto;
+  data: Moto;
 }
 
 export interface TokenResponse {
-  accessToken: string;
+  token: string;
 }
 
 export interface UserResponse {
-  user: User;
+  data: User;
 }
 
 export interface UsersResponse {
-  users: User[];
+  data: User[];
 }
 
 export interface UserLoginResponse {
@@ -31,9 +31,9 @@ export interface UserLoginResponse {
 
 
 export interface ResponseReservations {
-  reservations: Reservation[];
+  data: Reservation[];
 }
 
 export interface ResponseReservation {
-  reservation: Reservation;
+  data: Reservation;
 }

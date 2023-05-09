@@ -21,7 +21,7 @@ export class MotoService {
     (this.motoURL)
     .pipe(
         retry(3),
-        map(response => response.motos),
+        map(response => response.data),
         catchError((resp: HttpErrorResponse) =>
           throwError(() =>
             `Error getting restaurants. Status: ${resp.status}. Message: ${resp.message}`
@@ -39,7 +39,7 @@ export class MotoService {
     )
     .pipe(
       retry(3),
-      map((response) => response.moto),
+      map((response) => response.data),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
           `Error adding product. Status: ${resp.status}. Message: ${resp.message}`
@@ -48,21 +48,7 @@ export class MotoService {
     );
   }
 
-  addReservation(reservation: Reservation): Observable<Reservation> {
-    return this.http.post<ResponseReservation>
-    (this.motoURL,
-      reservation
-    )
-    .pipe(
-      retry(3),
-      map((response) => response.reservation),
-      catchError((resp: HttpErrorResponse) =>
-        throwError(() =>
-          `Error adding product. Status: ${resp.status}. Message: ${resp.message}`
-        )
-      )
-    );
-  }
+  
 
 
 
@@ -70,7 +56,7 @@ export class MotoService {
     return this.http.get<ResponseMoto>(`${this.motoURL}/${id}`)
     .pipe(
       retry(3),
-      map((response) => response.moto),
+      map((response) => response.data),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
           `Error getting product ${id}. Status: ${resp.status}. Message: ${resp.message}`

@@ -1,0 +1,113 @@
+<!-- Section: Design Block -->
+<section class="">
+  <!-- Jumbotron -->
+  <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container">
+      <div class="row gx-lg-5 align-items-center">
+
+        <div class="col-lg-12 mb-5 mb-lg-0">
+          <div class="card">
+            <div class="card-body py-5 px-md-5">
+              <div class="text-center mb-4">
+                <img src="../../../assets/imgs/logo.png"
+                  style="width: 185px;" alt="logo">
+
+              </div>
+              <form (ngSubmit)="editUser()"
+              #userForm="ngForm">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label for="correo">Nombre:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        [(ngModel)]="newUser.name"
+                        #nameModel="ngModel"
+                        [ngClass]="validClasses(nameModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="nameModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline mb-4">
+                      <label for="correo">Email:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="email"
+                        [(ngModel)]="newUser.email"
+                        #emailModel="ngModel"
+                        [ngClass]="validClasses(emailModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="emailModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label for="nombre">Teléfono: </label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="phone"
+                        [(ngModel)]="newUser.phone"
+                        #phoneModel="ngModel"
+                        [ngClass]="validClasses(phoneModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="phoneModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label for="nombre">License:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="license"
+                        [(ngModel)]="newUser.license"
+                        #licenseModel="ngModel"
+                        [ngClass]="validClasses(licenseModel, 'is-valid', 'is-invalid')"
+                        required
+                        />
+                        <div class="invalid-feedback" *ngIf="licenseModel.errors?.['required']">
+                          El campo no puede estar vacío
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- Submit button -->
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="userForm.invalid"
+                >
+                <!-- WE ARE CHANGING THE NAME TO THE BUTTON IT CAN ADD OR EDIT -->
+                  Editar reserva
+                </button>
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->

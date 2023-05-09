@@ -1,22 +1,85 @@
-<div class="container rounded bg-white mt-5 mb-5">
-  <div class="row">
-    <div class="col-md-5 border-right">
-      <div class="p-3 py-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-right">Profile Settings</h4>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-12"><label class="labels">Nombre</label><input type="text" class="form-control" placeholder="first name" value=""></div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
-            <div class="col-md-12"><label class="labels">Telefono</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
-            <div class="col-md-12"><label class="labels">Permiso de conducir</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-            <div class="col-md-12"><label class="labels">Password</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-        </div>
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-12">
+              <div class="card-body p-md-5 mx-md-4">
 
-        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Editar Perfil</button></div>
-    </div>
+                <div class="text-center mb-4">
+                  <img src="../../../assets/imgs/logo.png"
+                    style="width: 185px;" alt="logo">
+
+                </div>
+
+                <div class="col-lg-8">
+                  <div class="card mb-4">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Nombre</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <p class="text-muted mb-0">{{user.name}}</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Email</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <p class="text-muted mb-0">{{user.email}}</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Teléfono</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <p class="text-muted mb-0">{{user.phone}}</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Carnet de conducir</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <p class="text-muted mb-0">{{user.license}}</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Password</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <p class="text-muted mb-0">******</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+    <button class="btn btn-success" (click)="goBack()">Go back</button>
+    <button
+    type="button"
+    class="btn btn-primary ms-3"
+    (click)="edit()">
+    Editar Perfil
+  </button>
+
+
