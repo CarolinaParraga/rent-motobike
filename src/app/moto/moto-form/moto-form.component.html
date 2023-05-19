@@ -12,6 +12,7 @@
               #motoForm="ngForm">
 
                 <div class="form-outline mb-4">
+
                   <label for="registration">Matrícula</label>
                   <input
                     type="text"
@@ -39,6 +40,22 @@
                     required
                     />
                     <div class="invalid-feedback" *ngIf="colorModel.errors?.['required']">
+                      El color no puede quedar vacío
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label for="color">Brand</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="color"
+                    [(ngModel)]="newMoto.brand"
+                    #brandModel="ngModel"
+                    [ngClass]="validClasses(brandModel, 'is-valid', 'is-invalid')"
+                    required
+                    />
+                    <div class="invalid-feedback" *ngIf="brandModel.errors?.['required']">
                       El color no puede quedar vacío
                     </div>
                 </div>
