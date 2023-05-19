@@ -12,7 +12,7 @@ import { importProvidersFrom } from '@angular/core';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(withInterceptors([authInterceptor, baseUrlInterceptor])),
+    provideHttpClient(withInterceptors([baseUrlInterceptor])),
     provideRouter(APP_ROUTES),
     importProvidersFrom(BrowserAnimationsModule),
 

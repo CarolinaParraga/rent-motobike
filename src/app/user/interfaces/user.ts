@@ -12,3 +12,10 @@ export interface UserLogin {
   username: string;
   password: string;
 }
+
+export interface UserToken {
+  iat: number;
+  exp: number;
+  roles: []
+  username: string;
+}

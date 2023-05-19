@@ -122,7 +122,7 @@ canDeactivate() {
       },
       error: (error) =>{
         console.error(error)
-        this.snackBar.open('Error: ' + error.error.message, undefined, {
+        this.snackBar.open('Error al introducir los datos', undefined, {
           duration: 1500,
         });
       }

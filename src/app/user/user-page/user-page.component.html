@@ -24,30 +24,27 @@
                     <thead>
                       <tr>
                         <th scope="col">{{ headers.id }}</th>
-                        <th scope="col">{{ headers.startdate }}</th>
-                        <th scope="col">{{ headers.enddate }}</th>
-                        <th scope="col">{{ headers.starthour }}</th>
-                        <th scope="col">{{ headers.endhour }}</th>
-                        <th scope="col">{{ headers.moto }}</th>
-                        <th scope="col">{{ headers.pickuplocation }}</th>
-                        <th scope="col">{{ headers.returnlocation }}</th>
+                        <th scope="col">{{ headers.email }}</th>
+                        <th scope="col">{{ headers.name }}</th>
+                        <th scope="col">{{ headers.phone }}</th>
+                        <th scope="col">{{ headers.license }}</th>
+
                         <th scope="col">
 
                         </th>
                         <th scope="col">
-
 
                         </th>
                       </tr>
                     </thead>
 
 
-  <rm-reservation-card
+  <rm-user-card
     class="col"
-    *ngFor="let reservation of reservations | reservationPipe: search"
-    [reservation]="reservation"
-    (deleted)="deleteRestaurant(reservation)"
-  ></rm-reservation-card>
+    *ngFor="let user of users | userPipe: search"
+    [user]="user"
+    (deleted)="deleteUser(user)"
+  ></rm-user-card>
 </table>
 </div>
 </div>

@@ -7,74 +7,103 @@
           <h5 class="mb-0">Detalles de la reserva</h5>
         </div>
         <div class="card-body">
-          <!-- <form
-          (ngSubmit)="addReservation()"
-          [formGroup]="reservationForm">
+        <form class="mt-4"
+        (ngSubmit)="addReservation()"
+        #reservationForm="ngForm">
 
-            <div class="row mb-4">
-              <div class="col">
-                <div class="form-outline">
-                  <label for="name">Name:</label>
-                  <input
-                  type="text"
-                  class="form-control"
-                  name="name"
-                  formControlName="nameForm"
-                  [ngClass]="validClasses(nameControl, 'is-valid', 'is-invalid')"
-                />
-                <div class="invalid-feedback" *ngIf="nameControl.errors?.['required']">
-                  El nombre no puede quedar vacío
-                </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="form-outline mb-4">
-              <label for="correo">Email:</label>
-              <input
-              type="text"
-              class="form-control"
-              name="email"
-              formControlName="emailForm"
-              [ngClass]="validClasses(emailControl, 'is-valid', 'is-invalid')"
-            />
-            <div class="invalid-feedback" *ngIf="emailControl.errors?.['required']">
-              El email no puede quedar vació
-            </div>
-            </div>
-
-            <div class="form-outline mb-4">
-              <label for="correo">Fecha Recogida:</label>
-              <input
-              type="text"
-              class="form-control"
-              name="start"
-              formControlName="startForm"
-              [ngClass]="validClasses(startControl, 'is-valid', 'is-invalid')"
-            />
-            <div class="invalid-feedback" *ngIf="startControl.errors?.['required']">
+          <div class="form-outline mb-4">
+            <label for="correo">Fecha Recogida:</label>
+            <input
+            type="date"
+            class="form-control"
+            name="startdate"
+            [(ngModel)]="newReservation.startdate"
+            #startdateModel="ngModel"
+            [ngClass]="validClasses(startdateModel, 'is-valid', 'is-invalid')"
+            required
+          />
+            <div class="invalid-feedback" *ngIf="startdateModel.errors?.['required']">
               La fecha no puede quedar vacia
             </div>
-            </div>
-
-            <div class="form-outline mb-4">
-              <label for="correo">Fecha Devolución:</label>
-              <input
-              type="text"
-              class="form-control"
-              name="end"
-              formControlName="endForm"
-              [ngClass]="validClasses(endControl, 'is-valid', 'is-invalid')"
-            />
-            <div class="invalid-feedback" *ngIf="endControl.errors?.['required']">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="correo">Fecha Devolución:</label>
+            <input
+            type="date"
+            class="form-control"
+            name="enddate"
+            [(ngModel)]="newReservation.enddate"
+            #enddateModel="ngModel"
+            [ngClass]="validClasses(enddateModel, 'is-valid', 'is-invalid')"
+            required
+          />
+            <div class="invalid-feedback" *ngIf="enddateModel.errors?.['required']">
               La fecha no puede quedar vacia
             </div>
+          </div>
+          <div class="form-outline mb-4">
+            <label for="phone">Hora Recogida:</label>
+            <input
+            type="time"
+            class="form-control"
+            name="starthour"
+            [(ngModel)]="newReservation.starthour"
+            #starthourModel="ngModel"
+            [ngClass]="validClasses(starthourModel, 'is-valid', 'is-invalid')"
+            required
+          />
+            <div class="invalid-feedback" *ngIf="starthourModel.errors?.['required']">
+              La hora no puede estar vacía
             </div>
-
-            <button type="submit" class="btn btn-primary" [disabled]="reservationForm.invalid">Reservar</button>
-            <button class="btn btn-success" (click)="goBack()">Go back</button>
-          </form> -->
+          </div>
+          <div class="form-outline mb-4">
+            <label for="phone">Hora Devolución:</label>
+            <input
+            type="time"
+            class="form-control"
+            name="endhour"
+            [(ngModel)]="newReservation.endhour"
+            #endhourModel="ngModel"
+            [ngClass]="validClasses(endhourModel, 'is-valid', 'is-invalid')"
+            required
+          />
+            <div class="invalid-feedback" *ngIf="endhourModel.errors?.['required']">
+              La hora no puede estar vacía
+            </div>
+          </div>
+          <div class="form-outline mb-4">
+            <label for="phone">Lugar Recogida: </label>
+            <input
+            type="text"
+            class="form-control"
+            name="pickup"
+            [(ngModel)]="newReservation.pickuplocation"
+            #pickupModel="ngModel"
+            [ngClass]="validClasses(pickupModel, 'is-valid', 'is-invalid')"
+            required
+          />
+            <div class="invalid-feedback" *ngIf="pickupModel.errors?.['required']">
+              El dato no puede estar vacío
+            </div>
+          </div>
+          <div class="form-outline mb-4">
+            <label for="phone">Lugar Devolución: </label>
+            <input
+            type="text"
+            class="form-control"
+            name="return"
+            [(ngModel)]="newReservation.returnlocation"
+            #returnModel="ngModel"
+            [ngClass]="validClasses(returnModel, 'is-valid', 'is-invalid')"
+            required
+          />
+            <div class="invalid-feedback" *ngIf="returnModel.errors?.['required']">
+              El dato no puede estar vacío
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="reservationForm.invalid">Reservar</button>
+          <button class="btn btn-success" (click)="goBack()">Go back</button>
+        </form>
 
         </div>
       </div>
@@ -82,6 +111,9 @@
 
     <div class="col-md-4 mb-4">
       <div class="card mb-4">
+        <div class="card-header py-3">
+          <h5 class="mb-0">MOTO SELECCIONADA</h5>
+        </div>
         <div class="card-body">
           <h4 class="card-title"><a [routerLink]="" class="text-decoration-none">Modelo:{{ moto.model }}</a></h4>
           <p class="card-text">Descripción: {{ moto.description }}</p>

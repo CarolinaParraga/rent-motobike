@@ -7,6 +7,7 @@ import { MotoCardComponent } from '../moto-card/moto-card.component';
 import { MotoService } from '../services/moto.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MotoFilterPipe } from '../pipes/moto-filter.pipe';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'rm-motos-page',
@@ -25,7 +26,8 @@ export class MotosPageComponent implements OnInit {
   motos: Moto[] = [];
   search = '';
 
-  constructor(private readonly motoService: MotoService, private route: ActivatedRoute) {
+  constructor(private readonly motoService: MotoService,
+    private route: ActivatedRoute, authService: AuthService) {
 
   }
 

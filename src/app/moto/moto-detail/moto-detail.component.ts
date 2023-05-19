@@ -5,13 +5,14 @@ import { MotoCardComponent } from '../moto-card/moto-card.component';
 import { Moto } from '../interfaces/moto';
 import { RouterLink } from '@angular/router';
 import { MotoService } from '../services/moto.service';
-import { ReactiveFormsModule, NgForm, NgModel, FormGroup, FormControl, NonNullableFormBuilder, Validators, ɵFormControlCtor } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { User } from 'src/app/user/interfaces/user';
 import { UserService } from 'src/app/user/services/user.service';
 import { Reservation } from 'src/app/reservation/interfaces/reservation';
 import { CanDeactivateComponent } from '../../shared/guards/leave-page.guard';
+import { ReservationService } from 'src/app/reservation/services/reservation.service';
 
 @Component({
   selector: 'rm-moto-detail',
@@ -21,7 +22,7 @@ import { CanDeactivateComponent } from '../../shared/guards/leave-page.guard';
     CommonModule,
     MotoCardComponent,
     RouterLink,
-    ReactiveFormsModule,
+    FormsModule,
     MatSnackBarModule
   ],
   templateUrl: './moto-detail.component.html',
@@ -36,19 +37,15 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
   rate = 0;
   idMoto = '';
 
-  reservationForm!: FormGroup;
-  nameControl!: FormControl<string>;
-  emailControl!: FormControl<string>;
-  startControl!: FormControl<string>;
-  endControl!: FormControl<string>;
+  @ViewChild('reservationForm') reservationForm!: NgForm;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private readonly motoService: MotoService,
     private readonly userService: UserService,
-    private snackBar: MatSnackBar,
-    private fb: NonNullableFormBuilder
+    private readonly reservationService: ReservationService,
+    private snackBar: MatSnackBar
   ) {
     this.resetReservation();
   }
@@ -71,16 +68,14 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
 
   ngOnInit(): void {
 
-    this.nameControl = this.fb.control('', [
-      Validators.required,
-    ]);
 
-    /*this.idMoto = this.route.snapshot.params['id'];
+
+    this.idMoto = this.route.snapshot.params['id'];
     console.log(this.idMoto);
     const id = this.idMoto ? +this.idMoto : null;
-    console.log(id)*/
+    console.log(id)
 
-    //this.resetReservation();
+    this.resetReservation();
     this.moto = this.route.snapshot.data['moto'];
     this.motoService.getMoto(this.moto.id!)
     .subscribe({
@@ -90,14 +85,14 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
       error: error => console.error(error),
       complete: () => console.log("Moto loaded")
     });
-    /*this.userService.getProfile()
+    this.userService.getProfile()
     .subscribe({
       next: (rta) => {
         this.userLoged = rta
       },
       error: error => console.error(error),
       complete: () => console.log("User loaded")
-    });*/
+    });
 
 
   }
@@ -107,13 +102,11 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
     confirm('Quiere abandonar la página?. Los cambios no se guardarán');
   }
 
-  /*addReservation(){
+  addReservation(){
+    this.newReservation.moto = this.moto.id!;
+    this.newReservation.user = this.userLoged.id!;
 
-    this.newReservation.reservationdate = new Date().toLocaleDateString();
-    this.newReservation.moto = this.moto!;
-    this.newReservation.user = this.userLoged!;
-
-    this.motoService.addReservation(this.newReservation)
+    this.reservationService.addReservation(this.newReservation)
       .subscribe({
         next: () => {
           console.log('adding reservation');
@@ -129,17 +122,17 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
             duration: 1500,
           });}
       });
-  }*/
+  }
 
   goBack() {
     this.router.navigate(['/motos']);
   }
 
-  /*validClasses(control: FormControl, validClass: string, errorClass: string) {
+  validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
     return {
-      [validClass]: control.touched && control.valid,
-      [errorClass]: control.touched && control.invalid
+      [validClass]: ngModel.touched && ngModel.valid,
+      [errorClass]: ngModel.touched && ngModel.invalid
     };
-  }*/
+  }
 
 }

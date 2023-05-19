@@ -17,11 +17,11 @@ export interface TokenResponse {
   token: string;
 }
 
-export interface UserResponse {
+export interface ResponseUser {
   data: User;
 }
 
-export interface UsersResponse {
+export interface ResponseUsers {
   data: User[];
 }
 

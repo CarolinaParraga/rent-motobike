@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, map, Observable, throwError, retry } from 'rxjs';
 
 import { User } from '../interfaces/user';
-import { UserResponse, UsersResponse } from '../../shared/interfaces/responses';
+import { ResponseUser, ResponseUsers } from '../../shared/interfaces/responses';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +12,35 @@ export class UserService {
 
   private userURL = 'users';
 
+  token = localStorage.getItem('token');
+  headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.token);
+
   constructor(private readonly http: HttpClient) { }
 
+  getUsers(): Observable<User[]> {
+    return this.http.get<ResponseUsers>
+    (this.userURL)
+    .pipe(
+        retry(3),
+        map(response => response.data),
+        catchError((resp: HttpErrorResponse) =>
+          throwError(() =>
+            `Error getting restaurants. Status: ${resp.status}. Message: ${resp.message}`
+          )
+        )
+    );
+  }
+
   getProfile(): Observable<User> {
-    return this.http.get<UserResponse>(`${this.userURL}/profile`)
+    //let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.token);
+    return this.http.get<ResponseUser>(`${this.userURL}/profile`, {headers: this.headers})
     .pipe(
       map((response) => response.data)
     );
   }
 
   getOneUser(id: number):Observable<User> {
-    return this.http.get<UserResponse>(`${this.userURL}/${id}`)
+    return this.http.get<ResponseUser>(`${this.userURL}/${id}`, {headers: this.headers})
     .pipe(
       map((response) => response.data)
     );
@@ -31,8 +49,7 @@ export class UserService {
 
   editUser(user: User): Observable<void> {
     return this.http.put<void>
-    (`${this.userURL}/${user.id}`,
-    user
+    (`${this.userURL}/${user.id}`, user, {headers: this.headers}
     )
     .pipe(
       retry(3),
@@ -44,13 +61,17 @@ export class UserService {
     );
   }
 
-  editInformation(user: User):Observable<void> {
-      return this.http.put<void>(`${this.userURL}/me`, user);
-
-  }
-  editPassword(user:User):Observable<void> {
-      return this.http.put<void>(`${this.userURL}/me/password`, user);
-
+  deleteUser(id: number): Observable<void>{
+    return this.http.delete<void>
+    (`${this.userURL}/${id}`)
+    .pipe(
+      retry(3),
+      catchError((resp: HttpErrorResponse) =>
+        throwError(() =>
+          `Error deleting product ${id}. Status: ${resp.status}. Message: ${resp.message}`
+        )
+      )
+    );
   }
 
 }

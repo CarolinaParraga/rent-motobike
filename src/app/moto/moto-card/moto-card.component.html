@@ -1,10 +1,10 @@
 
-      <div class="card mb-4" *ngFor="let foto of fotos">
-        <a [routerLink]="['/motos', moto.id]" >
-          <img  class="card-img-top" src="../../../assets/imgs/{{foto}}.png" />
-        </a>
+      <div class="card mb-4" >
+
+        <img  class="card-img-top" src="../../../assets/imgs/logo.png" />
+
         <div class="card-body">
-          <h4 class="card-title"><a [routerLink]="['/motos', moto.id]" class="text-decoration-none">Modelo:{{ moto.model }}</a></h4>
+          <h4 class="card-title">Modelo:{{ moto.model }}</h4>
           <p class="card-text">Descripción: {{ moto.description }}</p>
           <p class="card-text">Marca: {{ moto.brand }}</p>
           <div class="card-text">
@@ -15,4 +15,15 @@
         </div>
         <div class="card-footer">
           <small class="text-muted">Precio: {{ moto.price}}€</small>
+          <a [routerLink]="['/motos', moto.id]" >
+            <button class="btn btn-success btn-sm float-end">Reservar</button>
+          </a>
+        </div>
+        <div class="card-footer" *ngIf="this.authService.isLoggedIn && this.authService.isAdmin ">
+          <a [routerLink]="['/motos', moto.id]" >
+            <button class="btn btn-danger btn-sm float-end">Eliminar</button>
+          </a>
+          <a [routerLink]="['/motos', moto.id]" >
+            <button class="btn btn-primary btn-sm float-end">Editar</button>
+          </a>
         </div>

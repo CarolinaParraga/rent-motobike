@@ -7,6 +7,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogConfirmationComponent } from "../../shared/dialog-confirmation/dialog-confirmation.component"
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'rm-moto-card',
@@ -24,7 +25,8 @@ export class MotoCardComponent {
 
   fotos: string[] = ['moto1', 'moto2', 'moto3', 'moto4']
 
-  constructor(private readonly motoService: MotoService, private dialogo: MatDialog, private snackBar: MatSnackBar) {
+  constructor(private readonly motoService: MotoService, private dialogo: MatDialog,
+    private snackBar: MatSnackBar, public authService: AuthService) {
 
   }
 
@@ -49,7 +51,7 @@ export class MotoCardComponent {
             },
             error: (error) =>{
               console.error(error);
-              this.snackBar.open('Error', undefined, {
+              this.snackBar.open('Error al eliminar la moto', undefined, {
                 duration: 1500,
               });}
           });

@@ -107,7 +107,7 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
         },
         error: (error) =>{
           console.error(error)
-          this.snackBar.open('Error: '+ error.error.message, undefined, {
+          this.snackBar.open('Error al añadir el vehículo ', undefined, {
             duration: 1500,
           });
         }

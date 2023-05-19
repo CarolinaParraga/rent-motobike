@@ -22,13 +22,13 @@
                     type="email"
                     class="form-control"
                     placeholder="Dirección de email"
-                    name="email"
+                    name="username"
                     [(ngModel)]="userLogin.username"
-                    #emailModel="ngModel"
-                    [ngClass]="validClasses(emailModel, 'is-valid', 'is-invalid')"
+                    #usernameModel="ngModel"
+                    [ngClass]="validClasses(usernameModel, 'is-valid', 'is-invalid')"
                     required />
 
-                    <div class="invalid-feedback" *ngIf="emailModel.errors?.['required']">
+                    <div class="invalid-feedback" *ngIf="usernameModel.errors?.['required']">
                       La dirección de email no puede estar vacía
                     </div>
                   </div>

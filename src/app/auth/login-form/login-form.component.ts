@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from "../services/auth.service";
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UserLogin } from '../../user/interfaces/user';
+import { User, UserLogin } from '../../user/interfaces/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'rm-login-form',
@@ -24,10 +25,14 @@ export class LoginFormComponent implements OnInit  {
   errorStatus : boolean = false;
   saved =  false;
   errorMsj = '';
+  user!: User;
+  userAdmin! : string [];
+  bool = false;
 
   @ViewChild('loginForm') loginForm!: NgForm;
 
   constructor(private authService: AuthService,
+    private userService: UserService,
     private readonly router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar) {
@@ -55,13 +60,14 @@ export class LoginFormComponent implements OnInit  {
       .subscribe({
         next: (res) => {
           console.log(res);
-          localStorage.setItem("token", res.token );
+          //localStorage.setItem("token", res.token );
+          this.router.navigate(['/motos']);
+          //window.location.reload();
 
-            this.router.navigate(['/restaurants']);
         },
         error: (error) =>{
           console.error(error);
-          this.snackBar.open('Error: '+ error.error.message, undefined, {
+          this.snackBar.open('Error al introducir los datos', undefined, {
             duration: 1500,
           });
         }

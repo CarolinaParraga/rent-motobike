@@ -34,7 +34,7 @@ export class MotoService {
 
   addMoto(moto: Moto): Observable<Moto> {
     return this.http.post<ResponseMoto>
-    (this.motoURL,
+    (`${this.motoURL}`,
       moto
     )
     .pipe(
@@ -48,7 +48,7 @@ export class MotoService {
     );
   }
 
-  
+
 
 
 

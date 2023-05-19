@@ -1,20 +1,40 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
   <div class="container-fluid">
     <a class="navbar-brand">MotoHire</a>
-    <ul class="navbar-nav me-auto">
-      <li class="nav-item">
-        <a class="nav-link"  >Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"  >Nueva reserva</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"  >Area cliente</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"  >Logout</a>
-      </li>
-    </ul>
+    <button class = "navbar-toggler border-0" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navMenu">
+      <span class = "navbar-toggler-icon"></span>
+  </button>
+
+  <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
+      <ul class = "navbar-nav mx-auto text-center" >
+
+          <li class = "nav-item px-2 py-2">
+              <a class = "nav-link text-uppercase text-light" [routerLink]="['/motos']" routerLinkActive="active">Home</a>
+          </li>
+          <li class = "nav-item px-2 py-2" *ngIf="this.authService.isLoggedIn" >
+              <a class = "nav-link text-uppercase text-light" [routerLink]="['/reservations']" routerLinkActive="active">Reservas</a>
+          </li>
+          <li class = "nav-item px-2 py-2" *ngIf="this.authService.isLoggedIn">
+              <a class = "nav-link text-uppercase text-light" [routerLink]="['/users/profile']" routerLinkActive="active">Perfil</a>
+          </li>
+          <li class = "nav-item px-2 py-2" *ngIf="this.authService.isLoggedIn && this.authService.isAdmin ">
+            <a class = "nav-link text-uppercase text-light" [routerLink]="['/users/profile']" routerLinkActive="active">Administrar Vehiculos</a>
+          </li>
+          <li class = "nav-item px-2 py-2" *ngIf="this.authService.isLoggedIn && this.authService.isAdmin ">
+            <a class = "nav-link text-uppercase text-light" [routerLink]="['/users/profile']" routerLinkActive="active">Administrar Usuarios</a>
+          </li>
+          <li class = "nav-item px-2 py-2" *ngIf="this.authService.isLoggedIn">
+              <a class = "nav-link text-uppercase text-light" (click)="logout()" [routerLink]=""  >Logout</a>
+          </li>
+          <li class = "nav-item px-2 py-2" *ngIf="!this.authService.isLoggedIn">
+            <a class = "nav-link text-uppercase text-light" [routerLink]="['/auth/login']" routerLinkActive="active">Login</a>
+          </li>
+          <li class = "nav-item px-2 py-2" *ngIf="!this.authService.isLoggedIn">
+            <a class = "nav-link text-uppercase text-light" [routerLink]="['/auth/register']" routerLinkActive="active">Register</a>
+          </li>
+
+      </ul>
+  </div>
   </div>
 </nav>
 

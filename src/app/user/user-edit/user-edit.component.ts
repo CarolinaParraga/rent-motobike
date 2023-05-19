@@ -1,23 +1,23 @@
-import { Component, EventEmitter, Output, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CanDeactivateComponent } from 'src/app/shared/guards/leave-page.guard';
 import { User } from '../interfaces/user';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CanDeactivateComponent } from '../../shared/guards/leave-page.guard';
 import { UserService } from '../services/user.service';
-import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
-  selector: 'rm-user-form',
+  selector: 'rm-user-edit',
   standalone: true,
   imports: [CommonModule, FormsModule,
     MatSnackBarModule],
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.css']
+  templateUrl: './user-edit.component.html',
+  styleUrls: ['./user-edit.component.css']
 })
-export class UserFormComponent implements OnInit, CanDeactivateComponent {
+export class UserEditComponent implements OnInit, CanDeactivateComponent {
   newUser! : User;
   saved = false;
   editing = false;

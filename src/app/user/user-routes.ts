@@ -6,20 +6,25 @@ import { userResolver } from './resolvers/user-resolver';
 // THIS WAS MOVED TO /app/shared
 import { leavePageGuard } from '../shared/guards/leave-page.guard';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserFormComponent } from './user-form/user-form.component';
+
 import { LoginActivateGuard } from '../shared/guards/login-activate.guard';
 
 export const USER_ROUTES: Routes = [
-
+  { path: '', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
+  loadComponent: () =>
+  import('./user-page/user-page.component').then(
+    (m) => m.UserPageComponent
+  ),
+  //canActivate: [LoginActivateGuard],
+  },
   { path: ':id/edit',
   loadComponent: () =>
-  import('./user-form/user-form.component').then(
-    (m) => m.UserFormComponent
+  import('./user-edit/user-edit.component').then(
+    (m) => m.UserEditComponent
   ),
+
   //canActivate: [LoginActivateGuard ],
-  resolve: {
-    user: userResolver,
-  },
+
 
   },
   { path: 'profile',

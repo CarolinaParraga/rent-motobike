@@ -13,5 +13,4 @@ export const userResolver: ResolveFn<User> = (route, state) => {
         return EMPTY;
       })
     );
-
 };

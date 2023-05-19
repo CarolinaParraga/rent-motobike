@@ -7,13 +7,13 @@ import { leavePageGuard } from '../shared/guards/leave-page.guard';
 
 import { LoginActivateGuard } from '../shared/guards/login-activate.guard';
 
-export const RESTAURANT_ROUTES: Routes = [
+export const RESERVATION_ROUTES: Routes = [
   { path: '', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
   loadComponent: () =>
   import('./reservation-page/reservation-page.component').then(
     (m) => m.ReservationPageComponent
   ),
-  canActivate: [LoginActivateGuard],
+  //canActivate: [LoginActivateGuard],
 
   },
   { path: 'add',

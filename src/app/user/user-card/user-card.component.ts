@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Reservation } from '../interfaces/reservation';
+import { User } from '../interfaces/user';
 import { RouterLink } from '@angular/router';
-import { ReservationService } from '../services/reservation.service';
+import { UserService } from '../services/user.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogConfirmationComponent } from "../../shared/dialog-confirmation/dialog-confirmation.component"
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,21 +10,21 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'rm-reservation-card',
+  selector: 'rm-user-card',
   standalone: true,
   imports:
   [CommonModule,
     RouterLink,
     MatDialogModule,
     MatSnackBarModule],
-  templateUrl: './reservation-card.component.html',
-  styleUrls: ['./reservation-card.component.css']
+  templateUrl: './user-card.component.html',
+  styleUrls: ['./user-card.component.css']
 })
-export class ReservationCardComponent {
+export class UserCardComponent {
   @Output() deleted = new EventEmitter<void>();
-  @Input() reservation!: Reservation;
+  @Input() user!: User;
 
-  constructor(private readonly reservationService: ReservationService, private route: ActivatedRoute,
+  constructor(private readonly userService: UserService, private route: ActivatedRoute,
     private router: Router,
     private dialogo: MatDialog, private snackBar: MatSnackBar) {
   }
@@ -33,24 +33,24 @@ export class ReservationCardComponent {
 
     this.dialogo
       .open(DialogConfirmationComponent, {
-        data: `¿Quiere eliminar esta reserva ${this.reservation.id}?`
+        data: `¿Quiere eliminar esta ususario ${this.user.id}?`
       })
       .afterClosed()
       .subscribe((conf: Boolean) => {
         if (!conf) return;
-        this.reservationService
-          .deleteReservation(this.reservation.id!)
+        this.userService
+          .deleteUser(this.user.id!)
           .subscribe({
             next: () => {
-              console.log('deleting reservation');
+              console.log('deleting user');
               this.deleted.emit();
-              this.snackBar.open('Eliminando reserva', undefined, {
+              this.snackBar.open('Eliminando ususario', undefined, {
                 duration: 1500,
               });
             },
             error: (error) =>{
               console.error(error);
-              this.snackBar.open('Error al eliminar la reserva', undefined, {
+              this.snackBar.open('Error al eliminar el usuario', undefined, {
                 duration: 1500,
               });}
           });
@@ -59,7 +59,7 @@ export class ReservationCardComponent {
   }
 
   edit() {
-    this.router.navigate(['/reservations', this.reservation.id, 'edit']);
+    this.router.navigate(['/users', this.user.id, 'edit']);
   }
 
 }

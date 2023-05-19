@@ -2,3 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.awesome-snackbar {
+  --mdc-snackbar-supporting-text-color: brown;
+  --mdc-snackbar-container-color: cyan;
+  --mat-mdc-snack-bar-button-color: green;
+}
