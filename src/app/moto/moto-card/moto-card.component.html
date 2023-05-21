@@ -20,10 +20,12 @@
           </a>
         </div>
         <div class="card-footer" *ngIf="this.authService.isLoggedIn && this.authService.isAdmin ">
-          <a [routerLink]="['/motos', moto.id]" >
-            <button class="btn btn-danger btn-sm float-end">Eliminar</button>
+
+            <button class="btn btn-danger btn-sm float-end" (click)="delete()">Eliminar</button>
+
+
+          <a [routerLink]="['/motos', moto.id, 'edit']" >
+            <button class="btn btn-success btn-sm float-end">Editar</button>
           </a>
-          <a [routerLink]="['/motos', moto.id]" >
-            <button class="btn btn-primary btn-sm float-end">Editar</button>
-          </a>
+
         </div>

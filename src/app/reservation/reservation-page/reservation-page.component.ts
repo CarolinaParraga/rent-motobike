@@ -45,7 +45,10 @@ export class ReservationPageComponent implements OnInit {
 
     this.reservationService.getReservations()
     .subscribe({
-      next: rta => this.reservations = rta,
+      next: rta => {
+        this.reservations = rta
+        console.log(this.reservations)
+      },
       error: error => console.log(error),
       complete: () => console.log("Reservations loaded")
     });

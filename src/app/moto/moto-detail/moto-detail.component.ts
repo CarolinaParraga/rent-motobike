@@ -105,6 +105,9 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
   addReservation(){
     this.newReservation.moto = this.moto.id!;
     this.newReservation.user = this.userLoged.id!;
+    console.log(typeof(this.newReservation.startdate))
+    console.log(this.newReservation)
+
 
     this.reservationService.addReservation(this.newReservation)
       .subscribe({

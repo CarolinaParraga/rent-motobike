@@ -20,7 +20,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class RegisterFormComponent implements OnInit, CanDeactivateComponent {
   newUser! : User;
-saved = false;
+  saved = false;
 
 
 registerForm!: FormGroup;
@@ -86,7 +86,7 @@ resetUser() {
   email: '',
   password: '',
   phone:0,
-  license:''
+  license:'',
   };
   this.saved = false;
 }

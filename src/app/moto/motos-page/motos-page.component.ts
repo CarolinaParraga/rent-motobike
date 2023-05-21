@@ -5,9 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { MotoFormComponent } from '../moto-form/moto-form.component';
 import { MotoCardComponent } from '../moto-card/moto-card.component';
 import { MotoService } from '../services/moto.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MotoFilterPipe } from '../pipes/moto-filter.pipe';
 import { AuthService } from 'src/app/auth/services/auth.service';
+
+
 
 @Component({
   selector: 'rm-motos-page',
@@ -17,6 +19,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
     FormsModule,
     MotoFormComponent,
     MotoCardComponent,
+    RouterLink,
     MotoFilterPipe
   ],
   templateUrl: './motos-page.component.html',
@@ -27,7 +30,7 @@ export class MotosPageComponent implements OnInit {
   search = '';
 
   constructor(private readonly motoService: MotoService,
-    private route: ActivatedRoute, authService: AuthService) {
+    private route: ActivatedRoute, public authService: AuthService) {
 
   }
 

@@ -10,48 +10,51 @@
     />
   </form>
 </nav>
-
-<section class="intro">
-  <div class="bg-image h-100" style="background-color: #60e9f0;">
+<section class="intro mb-5">
+  <div class="bg-image h-100" style="background-image: url('../../../assets/imgs/background.png');">
     <div class="mask d-flex align-items-center h-100">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12">
-            <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-borderless mb-0">
-                    <thead>
-                      <tr>
-                        <th scope="col">{{ headers.id }}</th>
-                        <th scope="col">{{ headers.email }}</th>
-                        <th scope="col">{{ headers.name }}</th>
-                        <th scope="col">{{ headers.phone }}</th>
-                        <th scope="col">{{ headers.license }}</th>
-
-                        <th scope="col">
-
-                        </th>
-                        <th scope="col">
-
-                        </th>
-                      </tr>
-                    </thead>
 
 
-  <rm-user-card
-    class="col"
-    *ngFor="let user of users | userPipe: search"
-    [user]="user"
-    (deleted)="deleteUser(user)"
-  ></rm-user-card>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+              <div class="card mb-5 mt-5">
+
+                <div class="card-block mt-3">
+
+
+                  <div *ngIf="users && users.length">
+                    <div class="row headers g-0 mb-3 bg-secondary ">
+
+                      <div class="col-2 p-3 px-5">{{ headers.id }}</div>
+                      <div class="col-2 p-3">{{ headers.email }}</div>
+                      <div class="col-2 p-3">{{ headers.name }}</div>
+                      <div class="col-2 p-3">{{ headers.phone }}</div>
+                      <div class="col-2 p-3">{{ headers.license }}</div>
+                      <div class="col-auto p-3"></div>
+                      <div class="col-auto p-3"></div>
+                    </div>
+                    <rm-user-card
+                      class="row g-0"
+                      *ngFor="let user of users | userPipe: search "
+                      [user]="user"
+                      (deleted)="deleteUser(user)"
+                    >
+                    </rm-user-card>
+                  </div>
+                  <ng-template #noProducts>
+                    <p>No hay ususarios que mostrar</p>
+                  </ng-template>
+                </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+
+
+

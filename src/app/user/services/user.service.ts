@@ -19,7 +19,7 @@ export class UserService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<ResponseUsers>
-    (this.userURL)
+    (this.userURL, {headers: this.headers})
     .pipe(
         retry(3),
         map(response => response.data),
@@ -49,7 +49,7 @@ export class UserService {
 
   editUser(user: User): Observable<void> {
     return this.http.put<void>
-    (`${this.userURL}/${user.id}`, user, {headers: this.headers}
+    (`${this.userURL}/edit/${user.id}`, user, {headers: this.headers}
     )
     .pipe(
       retry(3),

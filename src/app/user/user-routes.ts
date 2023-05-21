@@ -17,7 +17,7 @@ export const USER_ROUTES: Routes = [
   ),
   //canActivate: [LoginActivateGuard],
   },
-  { path: ':id/edit',
+  { path: 'edit',
   loadComponent: () =>
   import('./user-edit/user-edit.component').then(
     (m) => m.UserEditComponent

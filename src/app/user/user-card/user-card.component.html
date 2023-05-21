@@ -1,21 +1,15 @@
 
-<tbody>
-  <tr>
-    <td>{{user.id}}</td>
-    <td>{{user.email}}</td>
-    <td>{{user.name}}</td>
-    <td>{{user.phone}}</td>
-    <td>{{user.license}}</td>
+<div class="col-2 p-3 px-5">{{ user.id  }}</div>
+<div class="col-2 p-3">{{ user.email }}</div>
+<div class="col-2 p-3">{{ user.name }}</div>
+<div class="col-2 p-3">{{ user.phone }}</div>
+<div class="col-2 p-3">{{ user.license }}</div>
 
-    <td>
-      <button type="button" class="btn btn-danger btn-sm px-3" (click)="delete()">
-        <i class="fas fa-times"></i>
-      </button>
-    </td>
-    <td>
-      <button type="button" class="btn btn-danger btn-sm px-3" (click)="edit()">
-        <i class="fas fa-times"></i>
-      </button>
-    </td>
-  </tr>
-</tbody>
+<div class="col-auto p-3">
+  <button class="btn btn-sm btn-danger" (click)="delete()">X</button>
+</div>
+<div class="col-auto p-3">
+  <button class="btn btn-sm btn-danger" (click)="delete()">X</button>
+</div>
+
+

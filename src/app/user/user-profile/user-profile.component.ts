@@ -32,8 +32,8 @@ export class UserProfileComponent implements OnInit {
   resetUser() {
     this.user =  {
       email: '',
-      roles: [],
       password: '',
+      roles: [],
       name:'',
       phone: 0,
       license: ''
@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.resetUser()
     this.userService.getProfile()
     .subscribe({
       next: rta => {
@@ -54,6 +54,7 @@ export class UserProfileComponent implements OnInit {
       },
       error: error => console.error(error),
       complete: () => console.log("User loaded")
+
     });
 
   }
@@ -68,7 +69,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   edit() {
-    this.router.navigate(['/users', this.user.id, 'edit']);
+    this.router.navigate(['/users/edit']);
   }
 
 }
