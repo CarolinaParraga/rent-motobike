@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Moto } from '../interfaces/moto';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MotoService } from '../services/moto.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogConfirmationComponent } from "../../shared/dialog-confirmation/dialog-confirmation.component"
@@ -26,7 +26,7 @@ export class MotoCardComponent {
   fotos: string[] = ['moto1', 'moto2', 'moto3', 'moto4']
 
   constructor(private readonly motoService: MotoService, private dialogo: MatDialog,
-    private snackBar: MatSnackBar, public authService: AuthService) {
+    private snackBar: MatSnackBar, public authService: AuthService, private router: Router) {
 
   }
 
