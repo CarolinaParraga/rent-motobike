@@ -45,8 +45,11 @@ export class MotosPageComponent implements OnInit {
         console.error(error)},
       complete: () => console.log("Motos loaded")
     });
+
+
   }
   deleteMoto(moto: Moto) {
     this.motos = this.motos.filter(m => m !== moto);
+    console.log(this.motos)
   }
 }

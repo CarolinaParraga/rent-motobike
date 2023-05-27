@@ -26,6 +26,19 @@ export class ReservationService {
         )
     );
   }
+  getAvailability(): Observable<Reservation[]> {
+    return this.http.get<ResponseReservations>
+    (`${this.reservationURL}/availability`)
+    .pipe(
+        retry(3),
+        map(response => response.data),
+        catchError((resp: HttpErrorResponse) =>
+          throwError(() =>
+            `Error getting restaurants. Status: ${resp.status}. Message: ${resp.message}`
+          )
+        )
+    );
+  }
 
   addReservation(reservation: Reservation): Observable<Reservation> {
     return this.http.post<ResponseReservation>

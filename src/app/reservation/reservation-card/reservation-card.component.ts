@@ -8,6 +8,8 @@ import { DialogConfirmationComponent } from "../../shared/dialog-confirmation/di
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'rm-reservation-card',
@@ -16,13 +18,16 @@ import { ActivatedRoute, Router } from '@angular/router';
   [CommonModule,
     RouterLink,
     MatDialogModule,
-    MatSnackBarModule],
+    MatSnackBarModule,
+    FontAwesomeModule],
   templateUrl: './reservation-card.component.html',
   styleUrls: ['./reservation-card.component.css']
 })
 export class ReservationCardComponent {
   @Output() deleted = new EventEmitter<void>();
   @Input() reservation!: Reservation;
+  icons = { faPencil, faTrash }
+
 
   constructor(private readonly reservationService: ReservationService, private route: ActivatedRoute,
     private router: Router,
@@ -33,7 +38,8 @@ export class ReservationCardComponent {
 
     this.dialogo
       .open(DialogConfirmationComponent, {
-        data: `¿Quiere eliminar esta reserva ${this.reservation.id}?`
+        data: `¿Quiere eliminar esta reserva ${this.reservation.id}?`,
+        width: '500px'
       })
       .afterClosed()
       .subscribe((conf: Boolean) => {
@@ -46,12 +52,16 @@ export class ReservationCardComponent {
               this.deleted.emit();
               this.snackBar.open('Eliminando reserva', undefined, {
                 duration: 1500,
+                verticalPosition: 'top',
+                panelClass: 'awesome-snackbar',
               });
             },
             error: (error) =>{
               console.error(error);
               this.snackBar.open('Error al eliminar la reserva', undefined, {
                 duration: 1500,
+                verticalPosition: 'top',
+                panelClass: 'awesome-snackbar',
               });}
           });
       })

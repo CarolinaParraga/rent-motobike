@@ -25,18 +25,6 @@ export const RESERVATION_ROUTES: Routes = [
   canActivate: [LoginActivateGuard],
 
 },
-  { path: ':id', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
-  loadComponent: () =>
-  import('./reservation-details/reservation-details.component').then(
-    (m) => m.ReservationDetailsComponent
-  ),
-    //canActivate: [LoginActivateGuard ],
-
-    resolve: {
-      reservation: reservationResolver,
-    },
-
-  },
   { path: ':id/edit', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
   loadComponent: () =>
   import('./reservation-form/reservation-form.component').then(

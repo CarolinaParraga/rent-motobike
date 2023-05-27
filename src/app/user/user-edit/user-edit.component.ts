@@ -78,7 +78,7 @@ export class UserEditComponent implements OnInit, CanDeactivateComponent {
       emailForm: this.emailControl,
       phoneForm: this.phoneControl,
       licenseForm: this.licenseControl,
-      passwordForm: this.licenseControl,
+      passwordForm: this.passwordControl,
     });
 
     this.userService.getProfile()
@@ -105,13 +105,19 @@ export class UserEditComponent implements OnInit, CanDeactivateComponent {
     confirm('Do you want to leave this page?. Changes can be lost');
   }
 
+  goBack() {
+    this.router.navigate(['/users/profile']);
+  }
+
   editUser() {
+
     this.newUser.name = this.nameControl.value;
     this.newUser.email = this.emailControl.value;
     this.newUser.phone = this.phoneControl.value;
     this.newUser.license = this.licenseControl.value;
     this.newUser.password = this.passwordControl.value;
     this.newUser.roles = this.newUser.roles;
+
 
 
     this.userService.editUser(this.newUser)
@@ -121,6 +127,8 @@ export class UserEditComponent implements OnInit, CanDeactivateComponent {
         this.saved = true;
         this.snackBar.open('Editando usuario', undefined, {
           duration: 1500,
+          verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
         });
         this.router.navigate(['/users/profile']);
       },
@@ -128,6 +136,8 @@ export class UserEditComponent implements OnInit, CanDeactivateComponent {
         console.error(error);
         this.snackBar.open('Error', undefined, {
           duration: 1500,
+          verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
         });
       }
     });

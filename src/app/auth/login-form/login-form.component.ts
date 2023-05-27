@@ -69,6 +69,8 @@ export class LoginFormComponent implements OnInit  {
           console.error(error);
           this.snackBar.open('Error al introducir los datos', undefined, {
             duration: 1500,
+            verticalPosition: 'top',
+            panelClass: 'awesome-snackbar',
           });
         }
       });

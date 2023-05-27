@@ -48,7 +48,7 @@ export class UserService {
 
 
   editUser(user: User): Observable<void> {
-    return this.http.put<void>
+    return this.http.patch<void>
     (`${this.userURL}/edit/${user.id}`, user, {headers: this.headers}
     )
     .pipe(

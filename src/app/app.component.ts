@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from "./auth/services/auth.service";
 
+
 @Component({
   selector: 'rm-root',
   standalone: true,
@@ -15,6 +16,7 @@ import { AuthService } from "./auth/services/auth.service";
 export class AppComponent {
   title = 'rent-motobike';
   logged = false;
+
 
   constructor(
     public authService: AuthService,

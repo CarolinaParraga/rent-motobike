@@ -31,6 +31,8 @@ import { ReservationService } from 'src/app/reservation/services/reservation.ser
 export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
   moto!: Moto;
   userLoged! :User;
+  reservations: Reservation[] = [];
+  filter: Reservation[] = [];
   selectedValue!: number;
   newReservation!: Reservation;
   saved = false;
@@ -103,28 +105,80 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
   }
 
   addReservation(){
+    this.reservationService.getAvailability()
+    .subscribe({
+      next: rta => {
+        console.log(rta)
+        this.reservations = rta},
+      error: error =>{
+        console.error(error)},
+      complete: () => console.log("Motos loaded")
+    });
     this.newReservation.moto = this.moto.id!;
-    this.newReservation.user = this.userLoged.id!;
-    console.log(typeof(this.newReservation.startdate))
-    console.log(this.newReservation)
+      this.newReservation.user = this.userLoged.id!;
+      console.log(typeof(this.newReservation.startdate))
+      console.log(this.newReservation)
 
 
-    this.reservationService.addReservation(this.newReservation)
-      .subscribe({
-        next: () => {
-          console.log('adding reservation');
-          this.saved = true;
-          this.snackBar.open('La reserva se ha realizado con éxito', undefined, {
-            duration: 1500,
-          });
-          this.router.navigate(['/motos']);
-        },
-        error: (error) => {
-          console.error(error);
-          this.snackBar.open('Error: '+ error.error.message, undefined, {
-            duration: 1500,
-          });}
+      this.reservationService.addReservation(this.newReservation)
+        .subscribe({
+          next: () => {
+            console.log('adding reservation');
+            this.saved = true;
+            this.snackBar.open('La reserva se ha realizado con éxito', undefined, {
+              duration: 1500,
+              verticalPosition: 'top',
+              panelClass: 'awesome-snackbar',
+            });
+            this.router.navigate(['/motos']);
+          },
+          error: (error) => {
+            console.error(error);
+            this.snackBar.open('Error: '+ error.error.message, undefined, {
+              duration: 1500,
+              verticalPosition: 'top',
+              panelClass: 'awesome-snackbar',
+            });}
+        });
+    /*this.filter = this.reservations.filter(m =>
+      m.startdate === this.newReservation.startdate && m.moto === this.newReservation.moto &&
+      m.enddate === this.newReservation.enddate )
+    if(this.filter.length = 0){
+      this.newReservation.moto = this.moto.id!;
+      this.newReservation.user = this.userLoged.id!;
+      console.log(typeof(this.newReservation.startdate))
+      console.log(this.newReservation)
+
+
+      this.reservationService.addReservation(this.newReservation)
+        .subscribe({
+          next: () => {
+            console.log('adding reservation');
+            this.saved = true;
+            this.snackBar.open('La reserva se ha realizado con éxito', undefined, {
+              duration: 1500,
+              verticalPosition: 'top',
+              panelClass: 'awesome-snackbar',
+            });
+            this.router.navigate(['/motos']);
+          },
+          error: (error) => {
+            console.error(error);
+            this.snackBar.open('Error: '+ error.error.message, undefined, {
+              duration: 1500,
+              verticalPosition: 'top',
+              panelClass: 'awesome-snackbar',
+            });}
+        });
+    }
+    else{
+      this.snackBar.open('No hay disponibilidad para las fechas solicitdas', undefined, {
+        duration: 1500,
+        verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
       });
+    }*/
+
   }
 
   goBack() {

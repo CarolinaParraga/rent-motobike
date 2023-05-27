@@ -47,12 +47,16 @@ export class MotoCardComponent {
               this.deleted.emit();
               this.snackBar.open('Moto eliminada', undefined, {
                 duration: 1500,
+                verticalPosition: 'top',
+                panelClass: 'awesome-snackbar',
               });
             },
             error: (error) =>{
               console.error(error);
               this.snackBar.open('Error al eliminar la moto', undefined, {
                 duration: 1500,
+                verticalPosition: 'top',
+              panelClass: 'awesome-snackbar',
               });}
           });
       })

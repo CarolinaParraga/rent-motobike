@@ -8,6 +8,8 @@ import { DialogConfirmationComponent } from "../../shared/dialog-confirmation/di
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'rm-user-card',
@@ -16,13 +18,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   [CommonModule,
     RouterLink,
     MatDialogModule,
-    MatSnackBarModule],
+    MatSnackBarModule,
+    FontAwesomeModule],
   templateUrl: './user-card.component.html',
   styleUrls: ['./user-card.component.css']
 })
 export class UserCardComponent {
   @Output() deleted = new EventEmitter<void>();
   @Input() user!: User;
+  icons = { faPencil, faTrash }
 
   constructor(private readonly userService: UserService, private route: ActivatedRoute,
     private router: Router,
@@ -33,7 +37,7 @@ export class UserCardComponent {
 
     this.dialogo
       .open(DialogConfirmationComponent, {
-        data: `¿Quiere eliminar esta ususario ${this.user.id}?`
+        data: `¿Quiere eliminar este ususario ${this.user.id}?`
       })
       .afterClosed()
       .subscribe((conf: Boolean) => {
@@ -46,12 +50,16 @@ export class UserCardComponent {
               this.deleted.emit();
               this.snackBar.open('Eliminando ususario', undefined, {
                 duration: 1500,
+                verticalPosition: 'top',
+                panelClass: 'awesome-snackbar',
               });
             },
             error: (error) =>{
               console.error(error);
               this.snackBar.open('Error al eliminar el usuario', undefined, {
                 duration: 1500,
+                verticalPosition: 'top',
+                panelClass: 'awesome-snackbar',
               });}
           });
       })

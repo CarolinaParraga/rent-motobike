@@ -1,0 +1,12 @@
+.mat-dialog-title {
+  color: white;
+  background-color: #F48043;
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  padding: 20px 0px !important;
+}
+
+::ng-deep .mat-dialog-content {
+  padding: 10px !important;
+}

@@ -8,6 +8,7 @@ import { leavePageGuard } from '../shared/guards/leave-page.guard';
 import { MotosPageComponent } from './motos-page/motos-page.component';
 import { MotoDetailComponent } from './moto-detail/moto-detail.component';
 import { MotoFormComponent } from './moto-form/moto-form.component';
+import { LoginActivateGuard } from '../shared/guards/login-activate.guard';
 //import { LoginActivateGuard } from '../shared/guards/login-activate.guard';
 
 export const MOTO_ROUTES: Routes = [
@@ -33,7 +34,7 @@ export const MOTO_ROUTES: Routes = [
   import('./moto-detail/moto-detail.component').then(
     (m) => m.MotoDetailComponent
   ),
-    //canActivate: [motoIdGuard, LoginActivateGuard ],
+    canActivate: [motoIdGuard, LoginActivateGuard ],
 
     resolve: {
       moto: motoResolver,

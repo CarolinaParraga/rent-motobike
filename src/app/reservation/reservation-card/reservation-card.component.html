@@ -1,24 +1,18 @@
+<div class="col-1 p-3 px-5">{{ reservation.id  }}</div>
+<div class="col-1 p-3">{{ reservation.user }}</div>
+<div class="col-1 p-3">{{ reservation.startdate }}</div>
+<div class="col-1 p-3">{{ reservation.starthour }}</div>
+<div class="col-1 p-3">{{ reservation.enddate}}</div>
+<div class="col-1 p-3">{{ reservation.endhour }}</div>
+<div class="col-1 p-3">{{ reservation.moto }}</div>
+<div class="col-2 p-3">{{ reservation.pickuplocation }}</div>
+<div class="col-2 p-3">{{ reservation.returnlocation }}</div>
 
-<tbody>
-  <tr>
-    <td>{{reservation.id}}</td>
-    <td>{{reservation.startdate}}</td>
-    <td>{{reservation.enddate}}</td>
-    <td>{{reservation.starthour}}</td>
-    <td>{{reservation.endhour}}</td>
-    <td>{{reservation.moto}}</td>
-    <td>{{reservation.pickuplocation}}</td>
-    <td>{{reservation.returnlocation}}</td>
-    <td>
-      <button type="button" class="btn btn-danger btn-sm px-3" (click)="delete()">
-        <i class="fas fa-times"></i>
-      </button>
-    </td>
-    <td>
-      <button type="button" class="btn btn-danger btn-sm px-3" (click)="edit()">
-        <i class="fas fa-times"></i>
-      </button>
-    </td>
-  </tr>
-</tbody>
+<div class="col-auto p-3">
+  <button class="btn btn-sm btn-primary" (click)="edit()"><fa-icon [icon]="icons.faPencil"></fa-icon>
+    </button>
+  <button class="btn btn-sm btn-danger" (click)="delete()"><fa-icon [icon]="icons.faTrash"></fa-icon></button>
+</div>
+
+
 

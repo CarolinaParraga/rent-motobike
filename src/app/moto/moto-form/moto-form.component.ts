@@ -72,6 +72,8 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
     confirm('Quiere abandonar la página?. Los cambios se perderán');
   }
 
+
+
   addEditMoto() {
     if(this.editing){
       this.motoService.editMoto(this.newMoto)
@@ -81,13 +83,17 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
           this.saved = true;
           this.snackBar.open('Vehículo modificado', undefined, {
             duration: 1500,
+            verticalPosition: 'top',
+            panelClass: 'awesome-snackbar',
           });
-          this.router.navigate(['/motos',this.newMoto.id]);
+          this.router.navigate(['/motos']);
         },
         error: (error) =>{
           console.error(error);
           this.snackBar.open('Error: '+ error.error.message, undefined, {
             duration: 1500,
+            verticalPosition: 'top',
+            panelClass: 'awesome-snackbar',
           });
         }
       });
@@ -102,6 +108,8 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
           this.newMoto = moto;
           this.snackBar.open('Vehículo añadido correctamente', undefined, {
             duration: 1500,
+            verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
           });
           this.router.navigate(['/motos']);
         },
@@ -109,6 +117,8 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
           console.error(error)
           this.snackBar.open('Error al añadir el vehículo ', undefined, {
             duration: 1500,
+            verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
           });
         }
       });

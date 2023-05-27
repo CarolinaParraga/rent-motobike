@@ -15,7 +15,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot,
       next: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         if (this.authService.isLoggedIn !== true) {
-          window.alert("El acceso no está autorizado!");
+          window.alert("El acceso no está autorizado! Tiene que estar logueado para realizar una reserva");
           this.router.navigate(['/auth/login'])
         }
         return true;

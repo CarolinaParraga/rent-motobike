@@ -28,16 +28,18 @@ export class ReservationPageComponent implements OnInit {
   search = '';
   headers = {
     id: 'ID',
-    startdate: 'Fecha Recogina',
+    startdate: 'Fecha Recogida',
     enddate: 'Fecha Devolución',
     starthour: 'Hora recogida',
     endhour: 'Hora devolución',
     moto: 'Moto',
-    pickuplocation: 'Lugar Regogida',
+    pickuplocation: 'Lugar Recogida',
     returnlocation: 'Lugar Devolución',
+    user: 'Usuario'
   };
 
-  constructor(private readonly reservationService: ReservationService, private route: ActivatedRoute) {
+  constructor(private readonly reservationService: ReservationService,
+    private router: Router, private route: ActivatedRoute) {
 
   }
 
@@ -53,8 +55,12 @@ export class ReservationPageComponent implements OnInit {
       complete: () => console.log("Reservations loaded")
     });
   }
+  goBack() {
+    this.router.navigate(['/motos']);
+  }
 
-  deleteRestaurant(reservation: Reservation) {
+
+  deleteReservation(reservation: Reservation) {
     this.reservations = this.reservations.filter(r => r !== reservation);
   }
 

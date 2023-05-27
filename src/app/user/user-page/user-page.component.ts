@@ -37,7 +37,7 @@ export class UserPageComponent implements OnInit {
   };
 
   constructor(private readonly userService: UserService, private route: ActivatedRoute,
-    private dialogo: MatDialog, private snackBar: MatSnackBar) {
+    private dialogo: MatDialog, private snackBar: MatSnackBar, private router: Router) {
 
   }
 
@@ -57,7 +57,11 @@ export class UserPageComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.router.navigate(['/motos']);
+  }
+
   deleteUser(user: User) {
-    this.users = this.users.filter(r => r !== user);
+    this.users = this.users.filter(m => m !== user);
   }
 }

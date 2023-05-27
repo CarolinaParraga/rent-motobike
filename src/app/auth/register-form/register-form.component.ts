@@ -56,7 +56,7 @@ ngOnInit(): void {
       ]);
       this.passwordControl = this.fb.control('', [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(5),
       ]);
       this.licenseControl = this.fb.control('', [
         Validators.required
@@ -117,6 +117,8 @@ canDeactivate() {
         this.newUser = user;
         this.snackBar.open('Adding user', undefined, {
           duration: 1500,
+          verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
         });
         this.router.navigate(['/auth/login']);
       },
@@ -124,6 +126,8 @@ canDeactivate() {
         console.error(error)
         this.snackBar.open('Error al introducir los datos', undefined, {
           duration: 1500,
+          verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
         });
       }
     });
@@ -131,6 +135,8 @@ canDeactivate() {
     else{
       this.snackBar.open('Error. Los emails no son iguales', undefined, {
         duration: 1500,
+        verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
       });
     }
 
