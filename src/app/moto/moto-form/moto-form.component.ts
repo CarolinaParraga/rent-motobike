@@ -21,6 +21,7 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
   newMoto!: Moto;
   saved = false;
   editing = false;
+  photoName = '';
 
   @ViewChild('motoForm') motoForm!: NgForm;
 
@@ -49,6 +50,17 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
     this.saved = false;
   }
 
+  changeImage(fileInput: HTMLInputElement) {
+    if (!fileInput.files || fileInput.files.length === 0) {
+      return;
+    }
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(fileInput.files[0]);
+    reader.addEventListener('loadend', (e) => {
+      this.newMoto.photo = reader.result as string;
+    });
+  }
+
   ngOnInit(): void {
     this.route.data
     .subscribe((data) => {
@@ -56,11 +68,13 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
         console.log('We are editing');
         this.editing = true;
         this.newMoto = data['moto']; // LOAD product'S VALUES
+        this.photoName = '';
         this.titleService.setTitle(`Editando ${this.newMoto.description} | Alquiler Motos`); // SET A TITLE TO KNOW WE ARE EDITING
       }
       else {
         console.log('We are adding');
         this.editing = false; // IF NO OBJECTS ARE DETECTED WE ARE ADDING A PRODUCT
+        this.photoName = '';
         this.titleService.setTitle('Añadiendo Moto | Alquiler Motos'); // SET TITLE ACCORDINGLY
       }
     });

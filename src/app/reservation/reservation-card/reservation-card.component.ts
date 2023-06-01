@@ -10,6 +10,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from "../../auth/services/auth.service";
 
 @Component({
   selector: 'rm-reservation-card',
@@ -31,7 +32,7 @@ export class ReservationCardComponent {
 
   constructor(private readonly reservationService: ReservationService, private route: ActivatedRoute,
     private router: Router,
-    private dialogo: MatDialog, private snackBar: MatSnackBar) {
+    private dialogo: MatDialog, private snackBar: MatSnackBar, public authService: AuthService,) {
   }
 
   delete() {

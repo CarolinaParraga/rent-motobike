@@ -80,8 +80,50 @@
                       <div class="invalid-feedback" *ngIf="licenseControl.errors?.['required']">
                         El carnet de conducir no puede quedar vacío
                       </div>
+                      <div class="invalid-feedback" *ngIf="licenseControl.errors?.['minlength']">
+                        You must enter at least {{licenseControl.errors?.['minlength'].requiredLength - licenseControl.errors?.['minlength'].actualLength}} characters more
+                      </div>
                     </div>
                   </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline mb-4">
+                      <label for="password">Password:</label>
+                      <input
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      formControlName="passwordForm"
+                      [ngClass]="validClasses(passwordControl, 'is-valid', 'is-invalid')"
+                      required />
+                      <div class="invalid-feedback" *ngIf="passwordControl.errors?.['required']">
+                        La contraseña no puede quedar vacía
+                      </div>
+                      <div class="invalid-feedback" *ngIf="passwordControl.errors?.['minlength']">
+                        You must enter at least {{passwordControl.errors?.['minlength'].requiredLength - passwordControl.errors?.['minlength'].actualLength}} characters more
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline mb-4">
+                      <label for="password">Password:</label>
+                      <input
+                      type="password"
+                      class="form-control"
+                      name="password2"
+                      formControlName="password2Form"
+                      [ngClass]="validClasses(password2Control, 'is-valid', 'is-invalid')"
+                      required />
+                      <div class="invalid-feedback" *ngIf="password2Control.errors?.['required']">
+                        La contraseña no puede quedar vacía
+                      </div>
+                      <div class="invalid-feedback" *ngIf="password2Control.errors?.['minlength']">
+                        You must enter at least {{password2Control.errors?.['minlength'].requiredLength - password2Control.errors?.['minlength'].actualLength}} characters more
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
                 <div class="row">
                   <div class="col-md-6 mb-4">
@@ -102,30 +144,13 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline mb-4">
-                      <label for="password">Password:</label>
-                      <input
-                      type="password"
-                      class="form-control"
-                      name="password"
-                      formControlName="passwordForm"
-                      [ngClass]="validClasses(passwordControl, 'is-valid', 'is-invalid')"
-                      required />
-                      <div class="invalid-feedback" *ngIf="passwordControl.errors?.['required']">
-                        La contraseña no puede quedar vacía
-                      </div>
-                      <div class="invalid-feedback" *ngIf="passwordControl.errors?.['minlength']">
-                        You must enter at least {{passwordControl.errors?.['minlength'].requiredLength - passwordControl.errors?.['minlength'].actualLength}} characters more
-                      </div>
-                    </div>
-                  </div>
+
                 </div>
 
 
                 <!-- Submit button -->
-                <a class="btn btn-secondary" href="login.html" role="button">Go back</a>
-                <button type="submit" class="btn btn-primary"  [disabled]="registerForm.invalid">Register user</button>
+                <a class="btn btn-secondary" href="login.html" role="button">Go Back</a>
+                <button type="submit" class="btn btn-primary"  [disabled]="registerForm.invalid">Registrar usuario</button>
 
 
               </form>

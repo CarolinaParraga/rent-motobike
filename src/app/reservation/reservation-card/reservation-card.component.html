@@ -1,4 +1,4 @@
-<div class="col-1 p-3 px-5">{{ reservation.id  }}</div>
+<div class="col-1 p-3 ">{{ reservation.id  }}</div>
 <div class="col-1 p-3">{{ reservation.user }}</div>
 <div class="col-1 p-3">{{ reservation.startdate }}</div>
 <div class="col-1 p-3">{{ reservation.starthour }}</div>
@@ -9,7 +9,7 @@
 <div class="col-2 p-3">{{ reservation.returnlocation }}</div>
 
 <div class="col-auto p-3">
-  <button class="btn btn-sm btn-primary" (click)="edit()"><fa-icon [icon]="icons.faPencil"></fa-icon>
+  <button class="btn btn-sm btn-primary" *ngIf=" !this.authService.isAdmin " (click)="edit()"><fa-icon [icon]="icons.faPencil"></fa-icon>
     </button>
   <button class="btn btn-sm btn-danger" (click)="delete()"><fa-icon [icon]="icons.faTrash"></fa-icon></button>
 </div>

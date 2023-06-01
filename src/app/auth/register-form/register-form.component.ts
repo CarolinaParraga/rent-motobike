@@ -28,6 +28,7 @@ registerForm!: FormGroup;
   emailControl!: FormControl<string>;
   email2Control!: FormControl<string>;
   passwordControl!: FormControl<string>;
+  password2Control!: FormControl<string>;
   licenseControl!: FormControl<string>;
   phoneControl!: FormControl<number>;
 
@@ -58,8 +59,13 @@ ngOnInit(): void {
         Validators.required,
         Validators.minLength(5),
       ]);
+      this.password2Control = this.fb.control('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]);
       this.licenseControl = this.fb.control('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(9),
       ]);
       this.phoneControl = this.fb.control(0, [
         Validators.required,
@@ -71,6 +77,7 @@ ngOnInit(): void {
         emailForm: this.emailControl,
         email2Form: this.email2Control,
         passwordForm: this.passwordControl,
+        password2Form: this.password2Control,
         licenseForm: this.licenseControl,
         phoneForm: this.phoneControl,
       });
@@ -100,7 +107,7 @@ canDeactivate() {
 }
 
   onRegister() {
-    if(this.email2Control.value === this.emailControl.value){
+    if(this.email2Control.value === this.emailControl.value && this.password2Control.value === this.passwordControl.value){
       this.newUser.name = this.nameControl.value;
       this.newUser.email = this.emailControl.value;
       this.newUser.password = this.passwordControl.value;
@@ -133,7 +140,7 @@ canDeactivate() {
     });
     }
     else{
-      this.snackBar.open('Error. Los emails no son iguales', undefined, {
+      this.snackBar.open('Error. Los emails o password no son iguales', undefined, {
         duration: 1500,
         verticalPosition: 'top',
           panelClass: 'awesome-snackbar',

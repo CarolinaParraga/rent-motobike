@@ -9,7 +9,7 @@
         <div class="card-body">
         <form class="mt-4"
         (ngSubmit)="addReservation()"
-        #reservationForm="ngForm">
+              [formGroup]="reservationForm">
 
           <div class="form-outline mb-4">
             <label for="correo">Fecha Recogida:</label>
@@ -17,12 +17,11 @@
             type="date"
             class="form-control"
             name="startdate"
-            [(ngModel)]="newReservation.startdate"
-            #startdateModel="ngModel"
-            [ngClass]="validClasses(startdateModel, 'is-valid', 'is-invalid')"
+            formControlName="startdateForm"
+            [ngClass]="validClasses(startdateControl, 'is-valid', 'is-invalid')"
             required
           />
-            <div class="invalid-feedback" *ngIf="startdateModel.errors?.['required']">
+            <div class="invalid-feedback" *ngIf="startdateControl.errors?.['required']">
               La fecha no puede quedar vacia
             </div>
           </div>
@@ -32,12 +31,11 @@
             type="date"
             class="form-control"
             name="enddate"
-            [(ngModel)]="newReservation.enddate"
-            #enddateModel="ngModel"
-            [ngClass]="validClasses(enddateModel, 'is-valid', 'is-invalid')"
+            formControlName="enddateForm"
+            [ngClass]="validClasses(enddateControl, 'is-valid', 'is-invalid')"
             required
           />
-            <div class="invalid-feedback" *ngIf="enddateModel.errors?.['required']">
+            <div class="invalid-feedback" *ngIf="enddateControl.errors?.['required']">
               La fecha no puede quedar vacia
             </div>
           </div>
@@ -47,12 +45,11 @@
             type="time"
             class="form-control"
             name="starthour"
-            [(ngModel)]="newReservation.starthour"
-            #starthourModel="ngModel"
-            [ngClass]="validClasses(starthourModel, 'is-valid', 'is-invalid')"
+            formControlName="starthourForm"
+            [ngClass]="validClasses(starthourControl, 'is-valid', 'is-invalid')"
             required
           />
-            <div class="invalid-feedback" *ngIf="starthourModel.errors?.['required']">
+            <div class="invalid-feedback" *ngIf="starthourControl.errors?.['required']">
               La hora no puede estar vacía
             </div>
           </div>
@@ -62,12 +59,11 @@
             type="time"
             class="form-control"
             name="endhour"
-            [(ngModel)]="newReservation.endhour"
-            #endhourModel="ngModel"
-            [ngClass]="validClasses(endhourModel, 'is-valid', 'is-invalid')"
+            formControlName="endhourForm"
+            [ngClass]="validClasses(endhourControl, 'is-valid', 'is-invalid')"
             required
           />
-            <div class="invalid-feedback" *ngIf="endhourModel.errors?.['required']">
+            <div class="invalid-feedback" *ngIf="endhourControl.errors?.['required']">
               La hora no puede estar vacía
             </div>
           </div>
@@ -77,12 +73,11 @@
             type="text"
             class="form-control"
             name="pickup"
-            [(ngModel)]="newReservation.pickuplocation"
-            #pickupModel="ngModel"
-            [ngClass]="validClasses(pickupModel, 'is-valid', 'is-invalid')"
+            formControlName="pickupForm"
+            [ngClass]="validClasses(pickupControl, 'is-valid', 'is-invalid')"
             required
           />
-            <div class="invalid-feedback" *ngIf="pickupModel.errors?.['required']">
+            <div class="invalid-feedback" *ngIf="pickupControl.errors?.['required']">
               El dato no puede estar vacío
             </div>
           </div>
@@ -92,12 +87,11 @@
             type="text"
             class="form-control"
             name="return"
-            [(ngModel)]="newReservation.returnlocation"
-            #returnModel="ngModel"
-            [ngClass]="validClasses(returnModel, 'is-valid', 'is-invalid')"
+            formControlName="returnForm"
+            [ngClass]="validClasses(returnControl, 'is-valid', 'is-invalid')"
             required
           />
-            <div class="invalid-feedback" *ngIf="returnModel.errors?.['required']">
+            <div class="invalid-feedback" *ngIf="returnControl.errors?.['required']">
               El dato no puede estar vacío
             </div>
           </div>

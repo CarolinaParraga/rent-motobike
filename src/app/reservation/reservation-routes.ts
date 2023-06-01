@@ -13,7 +13,7 @@ export const RESERVATION_ROUTES: Routes = [
   import('./reservation-page/reservation-page.component').then(
     (m) => m.ReservationPageComponent
   ),
-  //canActivate: [LoginActivateGuard],
+  canActivate: [LoginActivateGuard],
 
   },
   { path: 'add',
@@ -21,7 +21,7 @@ export const RESERVATION_ROUTES: Routes = [
       import('./reservation-form/reservation-form.component').then(
         (m) => m.ReservationFormComponent
       ),
-  //canDeactivate: [leavePageGuard],
+  canDeactivate: [leavePageGuard],
   canActivate: [LoginActivateGuard],
 
 },
@@ -30,8 +30,8 @@ export const RESERVATION_ROUTES: Routes = [
   import('./reservation-form/reservation-form.component').then(
     (m) => m.ReservationFormComponent
   ),
-    //canActivate: [LoginActivateGuard ],
-    //canDeactivate: [leavePageGuard],
+    canActivate: [LoginActivateGuard ],
+    canDeactivate: [leavePageGuard],
     resolve: {
       reservation: reservationResolver,
     },

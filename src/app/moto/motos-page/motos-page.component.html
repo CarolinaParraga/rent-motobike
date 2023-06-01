@@ -1,4 +1,23 @@
+<div class="actions">
+  <button *ngIf="show" class="btn btn-primary btn-sm float-end" (click)="showHide()">{{ show ? 'X' : 'Mostrar' }}</button>
+</div>
+<div *ngIf="show" @fadeInOut>
+  <div class = "container">
+    <div class = "row gy-lg-5 align-items-center">
+        <div class = "col-lg-6 order-lg-1 text-center text-lg-start">
+            <div class = "title pt-3 pb-5">
+                <h1 class = "position-relative d-inline-block ms-4">¿Quieres beneciciarte de un 5% de descuento en el total de tu alquiler?</h1>
+                <h2 class="p-4 text-danger">Alquila más de siete días y obtendrás un 5% de descuento</h2>
+            </div>
 
+        </div>
+        <div class = "col-lg-6 order-lg-0">
+          <img  width="500" src="../../../assets/imgs/descuento.png" alt="">
+        </div>
+    </div>
+</div>
+
+</div>
 <!-- about us -->
 <section id = "about" class = "py-5">
   <div class = "container">

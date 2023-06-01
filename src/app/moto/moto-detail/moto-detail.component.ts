@@ -6,6 +6,7 @@ import { Moto } from '../interfaces/moto';
 import { RouterLink } from '@angular/router';
 import { MotoService } from '../services/moto.service';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, NonNullableFormBuilder, Validators, ɵFormControlCtor } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { User } from 'src/app/user/interfaces/user';
@@ -22,7 +23,7 @@ import { ReservationService } from 'src/app/reservation/services/reservation.ser
     CommonModule,
     MotoCardComponent,
     RouterLink,
-    FormsModule,
+    ReactiveFormsModule,
     MatSnackBarModule
   ],
   templateUrl: './moto-detail.component.html',
@@ -38,8 +39,20 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
   saved = false;
   rate = 0;
   idMoto = '';
+  model = '';
+  disponibilidad = false;
+  fechauno = new Date;
+  fechados = new Date;
+  resultado = false;
 
-  @ViewChild('reservationForm') reservationForm!: NgForm;
+  reservationForm!: FormGroup;
+  startdateControl!: FormControl<string>;
+  enddateControl!: FormControl<string>;
+  starthourControl!: FormControl<string>;
+  endhourControl!: FormControl<string>;
+  pickupControl!: FormControl<string>;
+  returnControl!: FormControl<string>;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -47,7 +60,8 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
     private readonly motoService: MotoService,
     private readonly userService: UserService,
     private readonly reservationService: ReservationService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private fb: NonNullableFormBuilder
   ) {
     this.resetReservation();
   }
@@ -69,6 +83,32 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
   }
 
   ngOnInit(): void {
+    this.startdateControl = this.fb.control('', [
+      Validators.required,
+    ]);
+    this.enddateControl = this.fb.control('', [
+      Validators.required,
+    ]);
+    this.starthourControl = this.fb.control('', [
+      Validators.required,
+    ]);
+    this.endhourControl = this.fb.control('', [
+      Validators.required,
+    ]);
+    this.pickupControl = this.fb.control('', [
+      Validators.required,
+    ]);
+    this.returnControl = this.fb.control('', [
+      Validators.required,
+    ]);
+    this.reservationForm = this.fb.group({
+      startdateForm: this.startdateControl,
+      enddateForm: this.enddateControl,
+      starthourForm: this.starthourControl,
+      endhourForm: this.endhourControl,
+      pickupForm: this.pickupControl,
+      returnForm: this.returnControl,
+    });
 
 
 
@@ -96,6 +136,18 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
       complete: () => console.log("User loaded")
     });
 
+    this.reservationService.getAvailability()
+    .subscribe({
+      next: av => {
+        console.log(av)
+        this.reservations = av
+        console.log(this.reservations)},
+
+      error: error =>{
+        console.error(error)},
+      complete: () => console.log("Motos loaded")
+    });
+
 
   }
 
@@ -105,51 +157,87 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
   }
 
   addReservation(){
-    this.reservationService.getAvailability()
-    .subscribe({
-      next: rta => {
-        console.log(rta)
-        this.reservations = rta},
-      error: error =>{
-        console.error(error)},
-      complete: () => console.log("Motos loaded")
-    });
-    this.newReservation.moto = this.moto.id!;
-      this.newReservation.user = this.userLoged.id!;
-      console.log(typeof(this.newReservation.startdate))
-      console.log(this.newReservation)
+    console.log(this.reservations)
+    console.log(this.moto.model)
+
+    this.newReservation.startdate = this.startdateControl.value;
+    this.newReservation.enddate = this.enddateControl.value;
+    this.newReservation.starthour = this.starthourControl.value;
+    this.newReservation.endhour = this.endhourControl.value;
+    this.newReservation.pickuplocation = this.pickupControl.value;
+    this.newReservation.returnlocation = this.returnControl.value;
+    this.fechauno = new Date(this.newReservation.startdate);
+    this.fechados = new Date(this.newReservation.enddate);
+    console.log(this.fechauno)
+    console.log(this.fechados)
 
 
-      this.reservationService.addReservation(this.newReservation)
-        .subscribe({
-          next: () => {
-            console.log('adding reservation');
-            this.saved = true;
-            this.snackBar.open('La reserva se ha realizado con éxito', undefined, {
-              duration: 1500,
-              verticalPosition: 'top',
+
+    if(this.newReservation.startdate < this.newReservation.enddate){
+      this.reservations.forEach(element => {
+        if(String(element.moto) == this.moto.model && (element.startdate == this.newReservation.startdate
+        || element.enddate == this.newReservation.enddate || (this.newReservation.startdate > element.startdate
+          && this.newReservation.startdate < element.enddate) || (this.newReservation.enddate < element.enddate
+            && this.newReservation.enddate > element.startdate) || (this.newReservation.enddate < element.startdate
+              && this.newReservation.enddate > element.enddate) )){
+          this.filter.push(element);
+        }
+      });
+      console.log(this.filter.length)
+      if(!this.filter.length){
+      this.newReservation.moto = this.moto.id!;
+          this.newReservation.user = this.userLoged.id!;
+          this.reservationService.addReservation(this.newReservation)
+          .subscribe({
+            next: () => {
+              console.log('adding reservation');
+              this.saved = true;
+              this.snackBar.open('La reserva se ha realizado con éxito', undefined, {
+                duration: 1500,
+                verticalPosition: 'top',
+                panelClass: 'awesome-snackbar',
+              });
+              this.router.navigate(['/motos']);
+            },
+            error: (error) => {
+              console.error(error);
+              this.snackBar.open('Error: '+ error.error.message, undefined, {
+                duration: 1500,
+                verticalPosition: 'top',
+                panelClass: 'awesome-snackbar',
+              });}
+          });
+
+        }
+        else{
+
+          this.snackBar.open('No hay disponibilidad para las fechas solicitadas', undefined, {
+            duration: 1500,
+            verticalPosition: 'top',
               panelClass: 'awesome-snackbar',
-            });
-            this.router.navigate(['/motos']);
-          },
-          error: (error) => {
-            console.error(error);
-            this.snackBar.open('Error: '+ error.error.message, undefined, {
-              duration: 1500,
-              verticalPosition: 'top',
-              panelClass: 'awesome-snackbar',
-            });}
-        });
+          });
+
+        }
+    }
+    else{
+      this.snackBar.open('Las fechas de devolución no puede ser anterior a la de recogida', undefined, {
+        duration: 1500,
+        verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
+      });
+
+    }
+
   }
 
   goBack() {
     this.router.navigate(['/motos']);
   }
 
-  validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
+  validClasses(control: FormControl, validClass: string, errorClass: string) {
     return {
-      [validClass]: ngModel.touched && ngModel.valid,
-      [errorClass]: ngModel.touched && ngModel.invalid
+      [validClass]: control.touched && control.valid,
+      [errorClass]: control.touched && control.invalid
     };
   }
 
