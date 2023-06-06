@@ -31,7 +31,7 @@ export const RESERVATION_ROUTES: Routes = [
     (m) => m.ReservationFormComponent
   ),
     canActivate: [LoginActivateGuard ],
-    canDeactivate: [leavePageGuard],
+    //canDeactivate: [leavePageGuard],
     resolve: {
       reservation: reservationResolver,
     },

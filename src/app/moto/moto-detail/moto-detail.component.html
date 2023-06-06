@@ -4,7 +4,7 @@
     <div class="col-md-8 mb-4">
       <div class="card mb-4">
         <div class="card-header py-3">
-          <h5 class="mb-0">Detalles de la reserva</h5>
+          <h5 class="mb-0">DETALLES DE LA RESERVA</h5>
         </div>
         <div class="card-body">
         <form class="mt-4"
@@ -109,7 +109,8 @@
           <h5 class="mb-0">MOTO SELECCIONADA</h5>
         </div>
         <div class="card-body">
-          <h4 class="card-title"><a [routerLink]="" class="text-decoration-none">Modelo:{{ moto.model }}</a></h4>
+          <img  class="card-img-top" style="height: 250px;" [src]="getSantizeUrl(moto.photo!)"/>
+          <h4 class="card-title">Modelo:{{ moto.model }}</h4>
           <p class="card-text">Descripción: {{ moto.description }}</p>
           <p class="card-text">Marca: {{ moto.brand }}</p>
           <div class="card-text">

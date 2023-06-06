@@ -102,7 +102,7 @@ export class UserEditComponent implements OnInit, CanDeactivateComponent {
 
   canDeactivate() {
     return this.saved ||
-    confirm('Do you want to leave this page?. Changes can be lost');
+    confirm('Quiere abandonar la página?. Los cambios no se guardarán');
   }
 
   goBack() {
@@ -130,7 +130,9 @@ export class UserEditComponent implements OnInit, CanDeactivateComponent {
           verticalPosition: 'top',
           panelClass: 'awesome-snackbar',
         });
-        this.router.navigate(['/users/profile']);
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        this.router.navigate(['/auth/login']);
       },
       error: (error) =>{
         console.error(error);

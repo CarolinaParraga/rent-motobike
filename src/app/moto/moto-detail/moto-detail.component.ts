@@ -14,6 +14,7 @@ import { UserService } from 'src/app/user/services/user.service';
 import { Reservation } from 'src/app/reservation/interfaces/reservation';
 import { CanDeactivateComponent } from '../../shared/guards/leave-page.guard';
 import { ReservationService } from 'src/app/reservation/services/reservation.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'rm-moto-detail',
@@ -61,6 +62,7 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
     private readonly userService: UserService,
     private readonly reservationService: ReservationService,
     private snackBar: MatSnackBar,
+    private sanitizer: DomSanitizer,
     private fb: NonNullableFormBuilder
   ) {
     this.resetReservation();
@@ -151,6 +153,11 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
 
   }
 
+  public getSantizeUrl(url : string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+
   canDeactivate() {
     return this.saved ||
     confirm('Quiere abandonar la página?. Los cambios no se guardarán');
@@ -197,7 +204,7 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
                 verticalPosition: 'top',
                 panelClass: 'awesome-snackbar',
               });
-              this.router.navigate(['/motos']);
+              this.router.navigate(['/reservations']);
             },
             error: (error) => {
               console.error(error);
@@ -210,13 +217,12 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
 
         }
         else{
-
           this.snackBar.open('No hay disponibilidad para las fechas solicitadas', undefined, {
-            duration: 1500,
+            duration: 2000,
             verticalPosition: 'top',
               panelClass: 'awesome-snackbar',
           });
-
+          this.router.navigate(['/motos']);
         }
     }
     else{
@@ -225,6 +231,7 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
         verticalPosition: 'top',
           panelClass: 'awesome-snackbar',
       });
+
 
     }
 

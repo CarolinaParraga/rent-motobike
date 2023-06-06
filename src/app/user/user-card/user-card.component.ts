@@ -37,7 +37,8 @@ export class UserCardComponent {
 
     this.dialogo
       .open(DialogConfirmationComponent, {
-        data: `¿Quiere eliminar este ususario ${this.user.id}?`
+        data: `¿Quiere eliminar el ususario ${this.user.email}?`,
+        panelClass: 'bg-color'
       })
       .afterClosed()
       .subscribe((conf: Boolean) => {

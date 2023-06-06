@@ -16,7 +16,7 @@ export class AuthService {
 
   private authURL = 'auth';
   logged: boolean = false;
-  private  loginChange$ = new ReplaySubject<boolean>(1);
+  //private  loginChange$ = new ReplaySubject<boolean>(1);
   user!: User | null
   decodedToken!: UserToken
   userAdmin! : string [];
@@ -39,7 +39,7 @@ export class AuthService {
         this.bool = this.userAdmin.includes('ROLE_ADMIN')
         console.log(this.bool);
         this.bool? localStorage.setItem("role", "true" ): localStorage.setItem("role", "false" )
-        this.loginChange$.next(true);
+        //this.loginChange$.next(true);
         return user;
       }),
       catchError((resp: HttpErrorResponse) =>
@@ -80,7 +80,7 @@ doLogout() {
   this.logged = false;
   let removeToken = localStorage.removeItem("token");
   let removeTokenAdmin = localStorage.removeItem("role");
-  this.loginChange$.next(false);
+  //this.loginChange$.next(false);
   if (removeToken == null && removeTokenAdmin == null ) {
     this.router.navigate(['/']);
   }
