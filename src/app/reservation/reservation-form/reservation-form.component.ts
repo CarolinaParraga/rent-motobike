@@ -171,7 +171,6 @@ export class ReservationFormComponent implements OnInit, CanDeactivateComponent 
         });
       }
       else{
-
         this.snackBar.open('No hay disponibilidad para las fechas solicitadas', undefined, {
           duration: 2000,
           verticalPosition: 'top',
