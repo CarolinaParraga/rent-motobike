@@ -15,15 +15,15 @@ export const USER_ROUTES: Routes = [
   import('./user-page/user-page.component').then(
     (m) => m.UserPageComponent
   ),
-  //canActivate: [LoginActivateGuard],
+  canActivate: [LoginActivateGuard],
   },
   { path: 'edit',
   loadComponent: () =>
   import('./user-edit/user-edit.component').then(
     (m) => m.UserEditComponent
   ),
-
-  //canActivate: [LoginActivateGuard ],
+  canDeactivate: [leavePageGuard],
+  canActivate: [LoginActivateGuard ],
 
 
   },
@@ -32,7 +32,7 @@ export const USER_ROUTES: Routes = [
   import('./user-profile/user-profile.component').then(
     (m) => m.UserProfileComponent
   ),
-  //canActivate: [LoginActivateGuard ],
+  canActivate: [LoginActivateGuard ],
 
   },
   { path: ':id', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
@@ -40,7 +40,7 @@ export const USER_ROUTES: Routes = [
   import('./user-profile/user-profile.component').then(
     (m) => m.UserProfileComponent
   ),
-    //canActivate: [userIdGuard, LoginActivateGuard ],
+    canActivate: [LoginActivateGuard ],
     resolve: {
       user: userResolver,
     },

@@ -8,6 +8,7 @@ import { DialogConfirmationComponent } from "../../shared/dialog-confirmation/di
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'rm-moto-card',
@@ -26,15 +27,21 @@ export class MotoCardComponent {
   fotos: string[] = ['moto1', 'moto2', 'moto3', 'moto4']
 
   constructor(private readonly motoService: MotoService, private dialogo: MatDialog,
-    private snackBar: MatSnackBar, public authService: AuthService, private router: Router) {
+    private snackBar: MatSnackBar, public authService: AuthService,
+    private router: Router, private sanitizer: DomSanitizer) {
 
+  }
+
+  public getSantizeUrl(url : string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   delete() {
 
     this.dialogo
       .open(DialogConfirmationComponent, {
-        data: `¿Quiere eliminar este modelo de moto ${this.moto.model}?`
+        data: `¿Quiere eliminar este modelo de moto ${this.moto.model}?`,
+        panelClass: 'bg-color'
       })
       .afterClosed()
       .subscribe((conf: Boolean) => {

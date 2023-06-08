@@ -2,7 +2,7 @@
       <div class="card mb-4" >
 
         <!-- <img  class="card-img-top" src="../../../assets/imgs/logo.png" /> -->
-        <img  class="card-img-top" src="../../../assets{{moto.photo}}"/>
+        <img  class="card-img-top" style="height: 250px;" [src]="getSantizeUrl(moto.photo!)" />
         <div class="card-body">
           <h4 class="card-title">Modelo:{{ moto.model }}</h4>
           <p class="card-text">Descripción: {{ moto.description }}</p>
@@ -15,7 +15,7 @@
         </div>
         <div class="card-footer">
           <small class="text-muted">Precio: {{ moto.price}}€</small>
-          <a [routerLink]="['/motos', moto.id]" >
+          <a *ngIf="!this.authService.isAdmin" [routerLink]="['/motos', moto.id]" >
             <button class="btn btn-success btn-sm float-end">Reservar</button>
           </a>
         </div>

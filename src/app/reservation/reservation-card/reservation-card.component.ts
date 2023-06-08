@@ -39,8 +39,8 @@ export class ReservationCardComponent {
 
     this.dialogo
       .open(DialogConfirmationComponent, {
-        data: `¿Quiere eliminar esta reserva ${this.reservation.id}?`,
-        width: '500px'
+        data: `¿Quiere eliminar la reserva ${this.reservation.id}?`,
+        panelClass: 'bg-color'
       })
       .afterClosed()
       .subscribe((conf: Boolean) => {

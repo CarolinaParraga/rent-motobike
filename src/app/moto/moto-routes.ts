@@ -9,7 +9,7 @@ import { MotosPageComponent } from './motos-page/motos-page.component';
 import { MotoDetailComponent } from './moto-detail/moto-detail.component';
 import { MotoFormComponent } from './moto-form/moto-form.component';
 import { LoginActivateGuard } from '../shared/guards/login-activate.guard';
-//import { LoginActivateGuard } from '../shared/guards/login-activate.guard';
+import { RoleActivateGuard } from '../shared/guards/role-activate.guard';
 
 export const MOTO_ROUTES: Routes = [
   { path: '', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
@@ -26,7 +26,7 @@ export const MOTO_ROUTES: Routes = [
         (m) => m.MotoFormComponent
       ),
   canDeactivate: [leavePageGuard],
-  //canActivate: [LoginActivateGuard],
+  canActivate: [LoginActivateGuard, RoleActivateGuard],
 
 },
   { path: ':id', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
@@ -46,7 +46,7 @@ export const MOTO_ROUTES: Routes = [
   import('./moto-detail/moto-detail.component').then(
     (m) => m.MotoDetailComponent
   ),
-    //canActivate: [motoIdGuard, LoginActivateGuard ],
+    canActivate: [motoIdGuard, LoginActivateGuard ],
 
     resolve: {
       moto: motoResolver,
@@ -58,7 +58,7 @@ export const MOTO_ROUTES: Routes = [
   import('./moto-form/moto-form.component').then(
     (m) => m.MotoFormComponent
   ),
-    //canActivate: [motoIdGuard, LoginActivateGuard ],
+    canActivate: [motoIdGuard, LoginActivateGuard, RoleActivateGuard ],
     canDeactivate: [leavePageGuard],
     resolve: {
       moto: motoResolver,

@@ -22,14 +22,16 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./reservation-form.component.css']
 })
 export class ReservationFormComponent implements OnInit, CanDeactivateComponent  {
+  //moto!: Moto;
+  reservations: Reservation[] = [];
+  filter: Reservation[] = [];
+  user!: User;
   newReservation!: Reservation;
   motos: Moto[] = [];
-  motoReserva!: Moto;
   users: User[] = [];
   saved = false;
-  editing = false;
-  model!: string [];
   array =  {
+    id: 0,
     user: '',
     moto: '',
     startdate: '',
@@ -72,11 +74,10 @@ export class ReservationFormComponent implements OnInit, CanDeactivateComponent 
 
     this.route.data
     .subscribe((data) => {
-      if (data['reservation']) { // IF WE DETECT A product WE ARE EDITING
+      if (data['reservation']) {
         console.log('We are editing');
         console.log(data['reservation'])
-        this.editing = true;
-        this.newReservation = data['reservation']; // LOAD product'S VALUES
+        this.newReservation = data['reservation'];
         this.array = data['reservation'];
         console.log(this.array)
       }
@@ -90,18 +91,28 @@ export class ReservationFormComponent implements OnInit, CanDeactivateComponent 
         console.error(error)},
       complete: () => console.log("Motos loaded")
     });
-    this.userService.getUsers()
+
+    this.userService.getProfile()
     .subscribe({
       next: rta => {
-        console.log(rta)
-        this.users = rta},
+        this.user = rta
+        console.log(this.user)
+      },
+      error: error => console.error(error),
+      complete: () => console.log("User loaded")
+    });
+
+    this.reservationService.getAvailability()
+    .subscribe({
+      next: av => {
+        console.log(av)
+        this.reservations = av
+        console.log(this.reservations)},
+
       error: error =>{
         console.error(error)},
-      complete: () => console.log("Users loaded")
+      complete: () => console.log("Motos loaded")
     });
-    console.log(this.array.moto)
-    console.log(this.motos)
-
 
   }
 
@@ -111,37 +122,71 @@ export class ReservationFormComponent implements OnInit, CanDeactivateComponent 
     confirm('Do you want to leave this page?. Changes can be lost');
   }
 
-
+  goBack() {
+      this.router.navigate(['/reservations']);
+  }
 
   editReservation() {
-    if(this.editing){
-
-      this.motos = this.motos.filter(m => m.model == this.array.moto)
-      this.users = this.users.filter(m => m.email == this.array.user)
-      this.motos.forEach(m => this.newReservation.moto = m.id)
-      this.users.forEach(m => this.newReservation.user = m.id)
-
-      this.reservationService.editReservation(this.newReservation)
-      .subscribe({
-        next: () => {
-          console.log('editing restaurant');
-          this.saved = true;
-          this.snackBar.open('Editando reserva', undefined, {
-            duration: 1500,
-            verticalPosition: 'top',
-            panelClass: 'awesome-snackbar',
-          });
-          this.router.navigate(['/reservations']);
-        },
-        error: (error) =>{
-          console.error(error);
-          this.snackBar.open('Error: '+ error.error.message, undefined, {
-            duration: 1500,
-            verticalPosition: 'top',
-            panelClass: 'awesome-snackbar',
-          });
+    this.motos = this.motos.filter(m => m.model == this.array.moto)
+    console.log(this.motos)
+    //this.users = this.users.filter(m => m.email == this.array.user)
+    //let arrayMotos = this.motos.map(m => this.newReservation.moto = m.id)
+    //console.log(arrayMotos)
+    //this.users.forEach(m => this.newReservation.user = m.id)
+    this.newReservation.user = this.user.id
+    console.log(this.array)
+    if(this.newReservation.startdate < this.newReservation.enddate){
+      this.reservations.forEach(element => {
+        if(element.id != this.array.id && String(element.moto) == this.array.moto && (element.startdate == this.newReservation.startdate
+        || element.enddate == this.newReservation.enddate || (this.newReservation.startdate > element.startdate
+          && this.newReservation.startdate < element.enddate) || (this.newReservation.enddate < element.enddate
+            && this.newReservation.enddate > element.startdate) || (this.newReservation.enddate < element.startdate
+              && this.newReservation.enddate > element.enddate) )){
+          this.filter.push(element);
         }
       });
+
+      if(!this.filter.length){
+        this.motos.forEach(m => this.newReservation.moto = m.id)
+        this.reservationService.editReservation(this.newReservation)
+        .subscribe({
+          next: () => {
+            console.log('editing reservation');
+            this.saved = true;
+            this.snackBar.open('Editando reserva', undefined, {
+              duration: 1500,
+              verticalPosition: 'top',
+              panelClass: 'awesome-snackbar',
+            });
+            this.router.navigate(['/reservations']);
+          },
+          error: (error) =>{
+            console.error(error);
+            this.snackBar.open('Error: '+ error.error.message, undefined, {
+              duration: 1500,
+              verticalPosition: 'top',
+              panelClass: 'awesome-snackbar',
+            });
+          }
+        });
+      }
+      else{
+        this.snackBar.open('No hay disponibilidad para las fechas solicitadas', undefined, {
+          duration: 2000,
+          verticalPosition: 'top',
+            panelClass: 'awesome-snackbar',
+        });
+        this.router.navigate(['/reservations']);
+      }
+
+    }
+    else{
+      this.snackBar.open('Las fechas de devolución no puede ser anterior a la de recogida', undefined, {
+        duration: 1500,
+        verticalPosition: 'top',
+          panelClass: 'awesome-snackbar',
+      });
+
     }
 
   }
