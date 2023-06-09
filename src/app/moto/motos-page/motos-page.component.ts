@@ -22,7 +22,6 @@ import { state, trigger, style, transition, animate, keyframes  } from '@angular
     MotoCardComponent,
     RouterLink,
     MotoFilterPipe,
-
   ],
   templateUrl: './motos-page.component.html',
   styleUrls: ['./motos-page.component.css'],

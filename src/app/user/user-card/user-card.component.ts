@@ -37,7 +37,7 @@ export class UserCardComponent {
 
     this.dialogo
       .open(DialogConfirmationComponent, {
-        data: `¿Quiere eliminar el ususario ${this.user.email}?`,
+        data: `¿Quiere eliminar el usuario ${this.user.email}?`,
         panelClass: 'bg-color'
       })
       .afterClosed()
@@ -57,7 +57,7 @@ export class UserCardComponent {
             },
             error: (error) =>{
               console.error(error);
-              this.snackBar.open('Error al eliminar el usuario', undefined, {
+              this.snackBar.open('No se ha eliminado el usuario', undefined, {
                 duration: 1500,
                 verticalPosition: 'top',
                 panelClass: 'awesome-snackbar',

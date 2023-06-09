@@ -102,7 +102,6 @@ resetUser() {
 
 canDeactivate() {
   return this.saved ||
-  this.registerForm.pristine || // IF THE FORM IS NOT TOUCHED YOU CAN LEAVE WITHOUT ASKING
   confirm('Esta seguro que quiere abandonar la página?. Los cambios no se guardarán');
 }
 
@@ -122,7 +121,7 @@ canDeactivate() {
         console.log('adding user');
         this.saved = true;
         this.newUser = user;
-        this.snackBar.open('Adding user', undefined, {
+        this.snackBar.open('Añadiendo usuario', undefined, {
           duration: 1500,
           verticalPosition: 'top',
           panelClass: 'awesome-snackbar',

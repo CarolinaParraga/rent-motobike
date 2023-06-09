@@ -2,9 +2,10 @@
       <div class="card mb-4" >
 
         <!-- <img  class="card-img-top" src="../../../assets/imgs/logo.png" /> -->
-        <img  class="card-img-top" style="height: 250px;" [src]="getSantizeUrl(moto.photo!)" />
+        <img  class="card-img-top" style="height: 250px;"
+        [src]="getSantizeUrl(moto.photo!)" [@scale]='scale' (click)="toggleScale()" />
         <div class="card-body">
-          <h4 class="card-title">Modelo:{{ moto.model }}</h4>
+          <h4 class="card-title">Modelo: {{ moto.model }}</h4>
           <p class="card-text">Descripción: {{ moto.description }}</p>
           <p class="card-text">Marca: {{ moto.brand }}</p>
           <div class="card-text">

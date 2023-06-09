@@ -64,29 +64,26 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
   ngOnInit(): void {
     this.route.data
     .subscribe((data) => {
-      if (data['moto']) { // IF WE DETECT A product WE ARE EDITING
+      if (data['moto']) {
         console.log('We are editing');
         this.editing = true;
-        this.newMoto = data['moto']; // LOAD product'S VALUES
+        this.newMoto = data['moto'];
         this.photoName = '';
-        this.titleService.setTitle(`Editando ${this.newMoto.description} | Alquiler Motos`); // SET A TITLE TO KNOW WE ARE EDITING
+        this.titleService.setTitle(`Editando ${this.newMoto.description} | Alquiler Motos`);
       }
       else {
         console.log('We are adding');
-        this.editing = false; // IF NO OBJECTS ARE DETECTED WE ARE ADDING A PRODUCT
+        this.editing = false;
         this.photoName = '';
-        this.titleService.setTitle('Añadiendo Moto | Alquiler Motos'); // SET TITLE ACCORDINGLY
+        this.titleService.setTitle('Añadiendo Moto | Alquiler Motos');
       }
     });
   }
 
   canDeactivate() {
     return this.saved ||
-    this.motoForm.pristine || // IF THE FORM IS NOT TOUCHED YOU CAN LEAVE WITHOUT ASKING
     confirm('Quiere abandonar la página?. Los cambios se perderán');
   }
-
-
 
   addEditMoto() {
     if(this.editing){
@@ -104,7 +101,7 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
         },
         error: (error) =>{
           console.error(error);
-          this.snackBar.open('Error: '+ error, undefined, {
+          this.snackBar.open('No se han guardado cambios', undefined, {
             duration: 1500,
             verticalPosition: 'top',
             panelClass: 'awesome-snackbar',
@@ -129,7 +126,7 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
         },
         error: (error) =>{
           console.error(error)
-          this.snackBar.open('Error al añadir el vehículo', undefined, {
+          this.snackBar.open('No se ha añadido vehículo', undefined, {
             duration: 1500,
             verticalPosition: 'top',
           panelClass: 'awesome-snackbar',

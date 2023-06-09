@@ -21,7 +21,7 @@ export class ReservationService {
         map(response => response.data),
         catchError((resp: HttpErrorResponse) =>
           throwError(() =>
-            `Error getting restaurants. Status: ${resp.status}. Message: ${resp.message}`
+            `Error getting reservations. Status: ${resp.status}. Message: ${resp.message}`
           )
         )
     );
@@ -34,7 +34,7 @@ export class ReservationService {
         map(response => response.data),
         catchError((resp: HttpErrorResponse) =>
           throwError(() =>
-            `Error getting restaurants. Status: ${resp.status}. Message: ${resp.message}`
+            `Error getting reservations. Status: ${resp.status}. Message: ${resp.message}`
           )
         )
     );
@@ -50,7 +50,7 @@ export class ReservationService {
       map((response) => response.data),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
-          `Error adding product. Status: ${resp.status}. Message: ${resp.message}`
+          `Error adding reservation. Status: ${resp.status}. Message: ${resp.message}`
         )
       )
     );
@@ -65,7 +65,7 @@ export class ReservationService {
       map((response) => response.data),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
-          `Error getting product ${id}. Status: ${resp.status}. Message: ${resp.message}`
+          `Error getting reservation ${id}. Status: ${resp.status}. Message: ${resp.message}`
         )
       )
     );
@@ -80,7 +80,7 @@ export class ReservationService {
       retry(3),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
-          `Error editing product ${reservation.id}. Status: ${resp.status}. Message: ${resp.message}`
+          `Error editing reservation ${reservation.id}. Status: ${resp.status}. Message: ${resp.message}`
         )
       )
     );
@@ -93,7 +93,7 @@ export class ReservationService {
       retry(3),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
-          `Error deleting product ${id}. Status: ${resp.status}. Message: ${resp.message}`
+          `Error deleting reservation ${id}. Status: ${resp.status}. Message: ${resp.message}`
         )
       )
     );

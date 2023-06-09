@@ -25,7 +25,7 @@ export class UserService {
         map(response => response.data),
         catchError((resp: HttpErrorResponse) =>
           throwError(() =>
-            `Error getting restaurants. Status: ${resp.status}. Message: ${resp.message}`
+            `Error getting users. Status: ${resp.status}. Message: ${resp.message}`
           )
         )
     );
@@ -68,7 +68,7 @@ export class UserService {
       retry(3),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
-          `Error deleting product ${id}. Status: ${resp.status}. Message: ${resp.message}`
+          `Error deleting user ${id}. Status: ${resp.status}. Message: ${resp.message}`
         )
       )
     );

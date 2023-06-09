@@ -60,10 +60,7 @@ export class LoginFormComponent implements OnInit  {
       .subscribe({
         next: (res) => {
           console.log(res);
-          //localStorage.setItem("token", res.token );
           this.router.navigate(['/motos']);
-          //window.location.reload();
-
         },
         error: (error) =>{
           console.error(error);

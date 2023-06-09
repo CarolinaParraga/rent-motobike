@@ -111,7 +111,7 @@ export class ReservationFormComponent implements OnInit, CanDeactivateComponent 
 
       error: error =>{
         console.error(error)},
-      complete: () => console.log("Motos loaded")
+      complete: () => console.log("Reservations loaded")
     });
 
   }
@@ -119,7 +119,7 @@ export class ReservationFormComponent implements OnInit, CanDeactivateComponent 
   canDeactivate() {
     return this.saved ||
     this.reservationForm.pristine || // IF THE FORM IS NOT TOUCHED YOU CAN LEAVE WITHOUT ASKING
-    confirm('Do you want to leave this page?. Changes can be lost');
+    confirm('Quiere abandonar la página?. Los cambios se perderán');
   }
 
   goBack() {
@@ -138,7 +138,7 @@ export class ReservationFormComponent implements OnInit, CanDeactivateComponent 
     if(this.newReservation.startdate < this.newReservation.enddate){
       this.reservations.forEach(element => {
         if(element.id != this.array.id && String(element.moto) == this.array.moto && (element.startdate == this.newReservation.startdate
-        || element.enddate == this.newReservation.enddate || (this.newReservation.startdate > element.startdate
+        || element.enddate == this.newReservation.enddate || element.enddate == this.newReservation.startdate || (this.newReservation.startdate > element.startdate
           && this.newReservation.startdate < element.enddate) || (this.newReservation.enddate < element.enddate
             && this.newReservation.enddate > element.startdate) || (this.newReservation.enddate < element.startdate
               && this.newReservation.enddate > element.enddate) )){
@@ -162,7 +162,7 @@ export class ReservationFormComponent implements OnInit, CanDeactivateComponent 
           },
           error: (error) =>{
             console.error(error);
-            this.snackBar.open('Error: '+ error.error.message, undefined, {
+            this.snackBar.open('Los cambios no se han guardado', undefined, {
               duration: 1500,
               verticalPosition: 'top',
               panelClass: 'awesome-snackbar',

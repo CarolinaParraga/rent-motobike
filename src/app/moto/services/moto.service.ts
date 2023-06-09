@@ -24,7 +24,7 @@ export class MotoService {
         map(response => response.data),
         catchError((resp: HttpErrorResponse) =>
           throwError(() =>
-            `Error getting restaurants. Status: ${resp.status}. Message: ${resp.message}`
+            `Error getting motos. Status: ${resp.status}. Message: ${resp.message}`
           )
         )
     );
@@ -42,15 +42,11 @@ export class MotoService {
       map((response) => response.data),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
-          `Error adding product. Status: ${resp.status}. Message: ${resp.message}`
+          `Error adding moto. Status: ${resp.status}. Message: ${resp.message}`
         )
       )
     );
   }
-
-
-
-
 
   getMoto(id: number): Observable<Moto> {
     return this.http.get<ResponseMoto>(`${this.motoURL}/${id}`)
@@ -59,7 +55,7 @@ export class MotoService {
       map((response) => response.data),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
-          `Error getting product ${id}. Status: ${resp.status}. Message: ${resp.message}`
+          `Error getting moto ${id}. Status: ${resp.status}. Message: ${resp.message}`
         )
       )
     );
@@ -74,7 +70,7 @@ export class MotoService {
       retry(3),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
-          `Error editing product ${moto.id}. Status: ${resp.status}. Message: ${resp.message}`
+          `Error editing moto ${moto.id}. Status: ${resp.status}. Message: ${resp.message}`
         )
       )
     );
@@ -87,7 +83,7 @@ export class MotoService {
       retry(3),
       catchError((resp: HttpErrorResponse) =>
         throwError(() =>
-          `Error deleting product ${id}. Status: ${resp.status}. Message: ${resp.message}`
+          `Error deleting moto ${id}. Status: ${resp.status}. Message: ${resp.message}`
         )
       )
     );

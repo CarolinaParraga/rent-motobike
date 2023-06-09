@@ -20,7 +20,7 @@ export const AUTH_ROUTES: Routes = [
       import('./register-form/register-form.component').then(
         (m) => m.RegisterFormComponent
       ),
-  canDeactivate: [leavePageGuard], // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
+  canDeactivate: [leavePageGuard]
 
   },
 ];

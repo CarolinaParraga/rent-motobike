@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
 
-// THESE ARE IN /app/products NEW FOLDER
 import { motoIdGuard } from './guards/moto-id.guard';
 import { motoResolver } from './resolvers/moto.resolver';
-// THIS WAS MOVED TO /app/shared
+
 import { leavePageGuard } from '../shared/guards/leave-page.guard';
 import { MotosPageComponent } from './motos-page/motos-page.component';
 import { MotoDetailComponent } from './moto-detail/moto-detail.component';
@@ -12,7 +11,7 @@ import { LoginActivateGuard } from '../shared/guards/login-activate.guard';
 import { RoleActivateGuard } from '../shared/guards/role-activate.guard';
 
 export const MOTO_ROUTES: Routes = [
-  { path: '', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
+  { path: '',
   loadComponent: () =>
   import('./motos-page/motos-page.component').then(
     (m) => m.MotosPageComponent
@@ -29,7 +28,7 @@ export const MOTO_ROUTES: Routes = [
   canActivate: [LoginActivateGuard, RoleActivateGuard],
 
 },
-  { path: ':id', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
+  { path: ':id',
   loadComponent: () =>
   import('./moto-detail/moto-detail.component').then(
     (m) => m.MotoDetailComponent
@@ -41,7 +40,7 @@ export const MOTO_ROUTES: Routes = [
     },
 
   },
-  { path: ':id/reservation', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
+  { path: ':id/reservation',
   loadComponent: () =>
   import('./moto-detail/moto-detail.component').then(
     (m) => m.MotoDetailComponent
@@ -53,7 +52,7 @@ export const MOTO_ROUTES: Routes = [
     },
 
   },
-  { path: ':id/edit', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
+  { path: ':id/edit',
   loadComponent: () =>
   import('./moto-form/moto-form.component').then(
     (m) => m.MotoFormComponent

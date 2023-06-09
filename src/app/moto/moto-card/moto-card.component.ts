@@ -9,7 +9,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { state, trigger, style, transition, animate, keyframes  } from '@angular/animations';
 
+const scale = trigger('scale', [
+  state('scaleIn', style({ transform: 'scale(1)' })),
+  state('scaleOut', style({ transform: 'scale(1.1)' })),
+  transition('scaleIn <=> scaleOut', animate('500ms linear'))
+]);
 @Component({
   selector: 'rm-moto-card',
   standalone: true,
@@ -18,12 +24,13 @@ import { DomSanitizer } from '@angular/platform-browser';
     MatDialogModule,
     MatSnackBarModule],
   templateUrl: './moto-card.component.html',
-  styleUrls: ['./moto-card.component.css']
+  styleUrls: ['./moto-card.component.css'],
+  animations: [ scale ]
 })
 export class MotoCardComponent {
   @Output() deleted = new EventEmitter<void>();
   @Input() moto!: Moto;
-
+  public scale = 'scaleIn';
   fotos: string[] = ['moto1', 'moto2', 'moto3', 'moto4']
 
   constructor(private readonly motoService: MotoService, private dialogo: MatDialog,
@@ -34,6 +41,10 @@ export class MotoCardComponent {
 
   public getSantizeUrl(url : string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  public toggleScale() {
+    this.scale = this.scale === 'scaleIn' ? 'scaleOut' : 'scaleIn';
   }
 
   delete() {

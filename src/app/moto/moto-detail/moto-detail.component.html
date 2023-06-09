@@ -109,8 +109,9 @@
           <h5 class="mb-0">MOTO SELECCIONADA</h5>
         </div>
         <div class="card-body">
-          <img  class="card-img-top" style="height: 250px;" [src]="getSantizeUrl(moto.photo!)"/>
-          <h4 class="card-title">Modelo:{{ moto.model }}</h4>
+          <img  class="card-img-top" style="height: 250px;" [src]="getSantizeUrl(moto.photo!)"
+          [@scale]='scale' (click)="toggleScale()"/>
+          <h4 class="card-title">Modelo: {{ moto.model }}</h4>
           <p class="card-text">Descripción: {{ moto.description }}</p>
           <p class="card-text">Marca: {{ moto.brand }}</p>
           <div class="card-text">

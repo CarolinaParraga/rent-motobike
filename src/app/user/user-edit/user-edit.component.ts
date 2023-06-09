@@ -136,7 +136,7 @@ export class UserEditComponent implements OnInit, CanDeactivateComponent {
       },
       error: (error) =>{
         console.error(error);
-        this.snackBar.open('Error', undefined, {
+        this.snackBar.open('No se ha modificado el usuario', undefined, {
           duration: 1500,
           verticalPosition: 'top',
           panelClass: 'awesome-snackbar',

@@ -51,12 +51,6 @@ export class AuthService {
 }
 
 
-
-/*async register(user: User): Promise<void> {
-  this.http.post(`${this.authURL}/register`, user);
-
-}*/
-
 register(user: User): Observable<any> {
   return this.http.post(`${this.authURL}/register`, user);
 }

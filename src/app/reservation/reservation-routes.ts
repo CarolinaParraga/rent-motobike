@@ -1,14 +1,10 @@
 import { Routes } from '@angular/router';
-
-// THESE ARE IN /app/products NEW FOLDER
 import { reservationResolver } from './resolvers/reservation.resolver';
-// THIS WAS MOVED TO /app/shared
 import { leavePageGuard } from '../shared/guards/leave-page.guard';
-
 import { LoginActivateGuard } from '../shared/guards/login-activate.guard';
 
 export const RESERVATION_ROUTES: Routes = [
-  { path: '', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
+  { path: '',
   loadComponent: () =>
   import('./reservation-page/reservation-page.component').then(
     (m) => m.ReservationPageComponent
@@ -25,7 +21,7 @@ export const RESERVATION_ROUTES: Routes = [
   canActivate: [LoginActivateGuard],
 
 },
-  { path: ':id/edit', // EVERYTHING THAT USED products/ PREFIX DO NOT NEED IT NOW
+  { path: ':id/edit',
   loadComponent: () =>
   import('./reservation-form/reservation-form.component').then(
     (m) => m.ReservationFormComponent

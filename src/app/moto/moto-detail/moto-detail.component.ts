@@ -15,6 +15,13 @@ import { Reservation } from 'src/app/reservation/interfaces/reservation';
 import { CanDeactivateComponent } from '../../shared/guards/leave-page.guard';
 import { ReservationService } from 'src/app/reservation/services/reservation.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { state, trigger, style, transition, animate, keyframes  } from '@angular/animations';
+
+const scale = trigger('scale', [
+  state('scaleIn', style({ transform: 'scale(1)' })),
+  state('scaleOut', style({ transform: 'scale(1.4)' })),
+  transition('scaleIn <=> scaleOut', animate('500ms linear'))
+]);
 
 @Component({
   selector: 'rm-moto-detail',
@@ -28,9 +35,11 @@ import { DomSanitizer } from '@angular/platform-browser';
     MatSnackBarModule
   ],
   templateUrl: './moto-detail.component.html',
-  styleUrls: ['./moto-detail.component.css']
+  styleUrls: ['./moto-detail.component.css'],
+  animations: [ scale ]
 })
 export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
+  public scale = 'scaleIn';
   moto!: Moto;
   userLoged! :User;
   reservations: Reservation[] = [];
@@ -153,6 +162,10 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
 
   }
 
+  public toggleScale() {
+    this.scale = this.scale === 'scaleIn' ? 'scaleOut' : 'scaleIn';
+  }
+
   public getSantizeUrl(url : string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
@@ -183,7 +196,8 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
     if(this.newReservation.startdate < this.newReservation.enddate){
       this.reservations.forEach(element => {
         if(String(element.moto) == this.moto.model && (element.startdate == this.newReservation.startdate
-        || element.enddate == this.newReservation.enddate || (this.newReservation.startdate > element.startdate
+        || element.enddate == this.newReservation.enddate || element.enddate == this.newReservation.startdate ||
+        (this.newReservation.startdate > element.startdate
           && this.newReservation.startdate < element.enddate) || (this.newReservation.enddate < element.enddate
             && this.newReservation.enddate > element.startdate) || (this.newReservation.enddate < element.startdate
               && this.newReservation.enddate > element.enddate) )){
@@ -208,7 +222,7 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
             },
             error: (error) => {
               console.error(error);
-              this.snackBar.open('Error: '+ error.error.message, undefined, {
+              this.snackBar.open('Reserva NO realizada', undefined, {
                 duration: 1500,
                 verticalPosition: 'top',
                 panelClass: 'awesome-snackbar',
