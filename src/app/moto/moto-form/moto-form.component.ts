@@ -69,7 +69,7 @@ export class MotoFormComponent implements OnInit, CanDeactivateComponent {
         this.editing = true;
         this.newMoto = data['moto'];
         this.photoName = '';
-        this.titleService.setTitle(`Editando ${this.newMoto.description} | Alquiler Motos`);
+        this.titleService.setTitle(`Editando Moto | Alquiler Motos`);
       }
       else {
         console.log('We are adding');
