@@ -66,12 +66,15 @@ export class UserEditComponent implements OnInit, CanDeactivateComponent {
     ]);
     this.phoneControl = this.fb.control(0, [
       Validators.required,
+      Validators.min(600000000),
     ]);
     this.licenseControl = this.fb.control('', [
       Validators.required,
+      Validators.minLength(9),
     ]);
     this.passwordControl = this.fb.control('', [
       Validators.required,
+      Validators.minLength(5),
     ]);
     this.informationForm = this.fb.group({
       nameForm: this.nameControl,

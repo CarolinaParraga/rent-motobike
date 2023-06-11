@@ -14,7 +14,7 @@
           <li class = "nav-item px-2 py-2" *ngIf="this.authService.isLoggedIn" >
               <a class = "nav-link text-uppercase text-light" [routerLink]="['/reservations']" routerLinkActive="active">Reservas</a>
           </li>
-          <li class = "nav-item px-2 py-2" *ngIf="this.authService.isLoggedIn">
+          <li class = "nav-item px-2 py-2" *ngIf="this.authService.isLoggedIn && !this.authService.isAdmin">
               <a class = "nav-link text-uppercase text-light" [routerLink]="['/users/profile']" routerLinkActive="active">Perfil</a>
           </li>
 

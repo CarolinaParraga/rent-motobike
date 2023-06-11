@@ -69,7 +69,7 @@ ngOnInit(): void {
       ]);
       this.phoneControl = this.fb.control(0, [
         Validators.required,
-        Validators.minLength(9),
+        Validators.min(600000000),
       ]);
 
       this.registerForm = this.fb.group({

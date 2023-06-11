@@ -138,7 +138,9 @@ export class ReservationFormComponent implements OnInit, CanDeactivateComponent 
     if(this.newReservation.startdate < this.newReservation.enddate){
       this.reservations.forEach(element => {
         if(element.id != this.array.id && String(element.moto) == this.array.moto && (element.startdate == this.newReservation.startdate
-        || element.enddate == this.newReservation.enddate || element.enddate == this.newReservation.startdate || (this.newReservation.startdate > element.startdate
+        || element.enddate == this.newReservation.enddate || element.enddate == this.newReservation.startdate ||
+        element.startdate == this.newReservation.enddate ||
+        (this.newReservation.startdate > element.startdate
           && this.newReservation.startdate < element.enddate) || (this.newReservation.enddate < element.enddate
             && this.newReservation.enddate > element.startdate) || (this.newReservation.enddate < element.startdate
               && this.newReservation.enddate > element.enddate) )){

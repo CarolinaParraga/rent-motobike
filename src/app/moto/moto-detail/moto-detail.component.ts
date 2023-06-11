@@ -197,6 +197,7 @@ export class MotoDetailComponent implements OnInit, CanDeactivateComponent {
       this.reservations.forEach(element => {
         if(String(element.moto) == this.moto.model && (element.startdate == this.newReservation.startdate
         || element.enddate == this.newReservation.enddate || element.enddate == this.newReservation.startdate ||
+        element.startdate == this.newReservation.enddate ||
         (this.newReservation.startdate > element.startdate
           && this.newReservation.startdate < element.enddate) || (this.newReservation.enddate < element.enddate
             && this.newReservation.enddate > element.startdate) || (this.newReservation.enddate < element.startdate

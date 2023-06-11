@@ -98,6 +98,7 @@
                     type="number"
                     class="form-control"
                     name="price"
+                    min="10"
                     [(ngModel)]="newMoto.price"
                     #priceModel="ngModel"
                     [ngClass]="validClasses(priceModel, 'is-valid', 'is-invalid')"

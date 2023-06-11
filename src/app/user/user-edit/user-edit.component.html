@@ -59,13 +59,14 @@
                         class="form-control"
                         name="phone"
                         formControlName="phoneForm"
+                        min="600000000"
                         [ngClass]="validClasses(phoneControl, 'is-valid', 'is-invalid')"
                         required
                         />
                         <div class="invalid-feedback" *ngIf="phoneControl.errors?.['required']">
                           El campo no puede estar vacío
                         </div>
-                        <div class="invalid-feedback" *ngIf="phoneControl.errors?.['minlength']">
+                        <div class="invalid-feedback" *ngIf="phoneControl.errors?.['min']">
                           Debes introducir un teléfono válido
                         </div>
                     </div>
@@ -78,6 +79,7 @@
                         class="form-control"
                         name="license"
                         formControlName="licenseForm"
+                        minlength="9"
                         [ngClass]="validClasses(licenseControl, 'is-valid', 'is-invalid')"
                         required
                         />
@@ -97,6 +99,7 @@
                         class="form-control"
                         name="password"
                         formControlName="passwordForm"
+                        minlength="5"
                         [ngClass]="validClasses(passwordControl, 'is-valid', 'is-invalid')"
                         required
                         />
