@@ -24,7 +24,7 @@
                     required minlength="7" maxlength="7"
                     />
                     <div class="invalid-feedback" *ngIf="registrationModel.errors?.['required']">
-                      La matrícula no puede quedar vacía
+                      La matrícula no puede quedar vacía, introduzca una matrícula válida
                     </div>
                 </div>
 
@@ -105,7 +105,7 @@
                     required
                     />
                     <div class="invalid-feedback" *ngIf="priceModel.errors?.['required']">
-                      El precio no puede quedar vacío
+                      El precio no puede quedar vacío, introduzca cantidad mayor de 9€
                     </div>
                 </div>
 
